@@ -1,0 +1,168 @@
+@import url("./fonts/fonts.css");
+@import url("./icomoon/style.css");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  overflow-x: hidden;
+  background: #f7f9fa;
+  font-family: "Inter", sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer ui {
+  .transition-300 {
+    @apply transition-all duration-300;
+  }
+
+  .absolute-x {
+    @apply absolute !-translate-x-1/2 !left-1/2;
+  }
+
+  .absolute-y {
+    @apply absolute !-translate-y-1/2 !top-1/2;
+  }
+
+  .absolute-center {
+    @apply absolute-x absolute-y;
+  }
+
+  .flex-y-center {
+    @apply flex items-center;
+  }
+
+  .flex-x-center {
+    @apply flex justify-center;
+  }
+
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+
+  .flex-center-between {
+    @apply flex justify-between items-center;
+  }
+
+  .flex-between {
+    @apply flex justify-between;
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  background: #f7faf8;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.flex-y-center {
+  display: flex;
+  align-items: center;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-center-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+
+button {
+  cursor: pointer;
+}
+
+p,
+span,
+a {
+  line-height: 130% !important;
+}
+
+.validation-message a {
+  color: dodgerblue;
+}
+
+.static-pages h1 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+
+.static-pages h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+
+.static-pages h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+
+.static-pages h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+
+.static-pages h5 {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+
+.static-pages p {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+.static-pages a {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.static-pages ul {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.InfoActCard {
+  box-shadow: 0px 1.22px 3.62px 0px #00273405;
+  box-shadow: 0px 3.38px 10.02px 0px #00273408;
+  box-shadow: 0px 8.14px 24.12px 0px #0027340A;
+  box-shadow: 0px 27px 80px 0px #0027340F;
+}
