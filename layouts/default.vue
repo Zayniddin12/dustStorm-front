@@ -4,7 +4,6 @@
     <div class="min-h-[calc(100vh-558px)]">
       <slot />
     </div>
-    <LayoutsFooter
-    />
+    <LayoutsFooter />
   </div>
 </template>

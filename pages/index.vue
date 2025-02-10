@@ -1,7 +1,7 @@
 <template>
   <div>
+    <SectionsMain />
     <InfoArt />
-    <HomeFooter />
     <span class="icon-youtube"></span>
     <span class="icon-telegram"></span>
     <span class="icon-search"></span>
@@ -22,5 +22,4 @@
 
 <script setup lang="ts">
 import InfoArt from '@/components/Home/InfoArt.vue'
-import HomeFooter from '@/components/Home/HomeFooter.vue'
 </script>
