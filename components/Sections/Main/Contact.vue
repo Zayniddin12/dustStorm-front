@@ -6,7 +6,7 @@ import { formatPhoneNumber } from '~/utils';
 </script>
 
 <template>
-    <section class="bg-primary pt-[100px] pb-[50px]">
+    <section class="bg-primary pb-[10px] pt-[50px]">
         <div class="mx-auto max-w-[1200px] px-[15px]">
             <div class="bg-green-100 w-[100%] sm:p-[64px] p-[20px] rounded-10">
                 <div>
@@ -46,7 +46,7 @@ import { formatPhoneNumber } from '~/utils';
                             <span class="block opacity-[0.7] text-[14px]">
                                 {{ t("Contact__phone") }}
                             </span>
-                            <span class="block text-[16px]">
+                            <span class="block text-16">
                                 {{ formatPhoneNumber('+998970206868') }}
                             </span>
                         </div>
