@@ -1,7 +1,6 @@
 <template>
   <div>
-    <SectionsMain />
-    <InfoArt />
+
     <span class="icon-youtube"></span>
     <span class="icon-telegram"></span>
     <span class="icon-search"></span>
@@ -17,9 +16,13 @@
     <span class="icon-twitter"></span>
     <span class="icon-close"></span>
     <span class="icon-burger"></span>
+    <SectionsMain />
+    <Event />
+    <Contact />
+
   </div>
 </template>
-
 <script setup lang="ts">
-import InfoArt from '@/components/Home/InfoArt.vue'
+import Event from '@/components/Sections/Main/Event.vue'
+import Contact from '@/components/Sections/Main/Contact.vue'
 </script>
