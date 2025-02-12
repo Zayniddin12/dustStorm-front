@@ -1,5 +1,19 @@
 {
   "lang": "en",
+  "stations": "Stations",
   "contact_us_btn": "Contact us",
-  "stations": "Stations"
+  "InfoArt__Title": "Information and articles",
+  "InfoArt__btn": "All articles",
+  "Contact__title": "Contact us",
+  "Contact__text": "Contact us using the methods below you can exit",
+  "Contact__address": "Visit our office:",
+  "Contact__location": "Tashkent city, Mirabad district, st. Oybek 49",
+  "Contact__phone": "Phone number:",
+  "Contact__email": "Email",
+  "Home__Footer__text": "By contributing to the development of the fund, you make the lives of thousands of our fellow citizens much better and help them become one step closer to their goals and dreams.",
+  "Home__Footer__subText": "All rights reserved.",
+  "ErrorPage__title": "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.",
+  "Go_to_Homepage": "Go to home page",
+  "About_Us": "About us",
+  "News__title":"News"
 }

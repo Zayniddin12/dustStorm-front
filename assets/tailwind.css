@@ -12,6 +12,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
 @layer ui {
   .transition-300 {
     @apply transition-all duration-300;
@@ -165,4 +166,13 @@ a {
   box-shadow: 0px 3.38px 10.02px 0px #00273408;
   box-shadow: 0px 8.14px 24.12px 0px #0027340A;
   box-shadow: 0px 27px 80px 0px #0027340F;
+}
+
+#nprogress .bar {
+  background: #3498db !important;
+  height: 3px !important;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px #3498db, 0 0 5px #3498db !important;
 }

@@ -1,133 +1,80 @@
 <script setup lang="ts">
-import { NuxtLink } from '#components'
+import { NuxtLink } from '#components';
+import { useI18n } from 'vue-i18n';
+import { SocialMedia } from '~/data/SocialMedia';
+import { useRoute } from 'vue-router';
+import { formatPhoneNumber } from '~/utils';
+import { useSupportStore } from '~/Store/store';
+
+const { t } = useI18n();
+const route = useRoute();
+
+const supportStore = useSupportStore();
+const contactInfo = ref<IContactInfo | null>(null);
+onMounted(async () => {
+  if (!supportStore.contactInfo) {
+    await supportStore.getContactInfo();
+  }
+  contactInfo.value = supportStore.contactInfo;
+});
+
 </script>
 
 <template>
-  <footer
-    class="bg-gradient-to-b from-[#33B34A] to-[#10161C] w-full pt-[106px]"
-  >
+  <footer :class="[
+    'w-full relative z-10 from-primary to-dark-200',
+    route.path === '/' ? 'bg-gradient-to-b pt-[50px]' : 'bg-gradient-to-r'
+  ]">
     <div class="mx-auto max-w-[1200px] px-[15px]">
-      <div class="bg-[#1b4b2b77] w-[100%] sm:p-[64px] p-[10px] rounded-[12px]">
-        <div>
-          <h1 class="text-[white] text-[32px]">Свяжитесь с нами</h1>
-          <p class="text-[16px] text-[#ffffff89] sm:w-[320px]">
-            Свяжитесь с нами, используя методы ниже ты можешь выйти
-          </p>
-        </div>
-        <div class="flex items-center flex-col gap-[12px] mt-[36px]">
-          <div
-            class="group border-[1px] rounded-[12px] w-[100%] text-[white] p-[12px] border-[#ffffff7a] flex items-center gap-[8px] hover:bg-[#CAA244] cursor-pointer duration-500"
-          >
-            <div
-              class="rounded-[8px] bg-[#caa24462] group-hover:bg-[#ffffff66] w-[42px] h-[42px] flex items-center justify-center"
-            >
-              <span
-                class="icon-map-pin-filled text-[30px] text-[#CAA244] group-hover:text-white duration-500"
-              ></span>
-            </div>
-            <div>
-              <span class="block opacity-[0.7] text-[14px]">
-                Посетите наш офис:
-              </span>
-              <span class="block text-[16px]">
-                г.Ташкент, Мирабадский район, ул. Ойбек 49
-              </span>
-            </div>
-          </div>
-
-          <div
-            class="group border-[1px] rounded-[12px] w-[100%] text-[white] p-[12px] border-[#ffffff7a] flex items-center gap-[8px] hover:bg-[#CAA244] cursor-pointer duration-500"
-          >
-            <div
-              class="rounded-[8px] bg-[#caa24462] group-hover:bg-[#ffffff66] duration-500 w-[42px] h-[42px] flex items-center justify-center"
-            >
-              <span
-                class="icon-phone text-[30px] text-[#CAA244] group-hover:text-white duration-500"
-              ></span>
-            </div>
-            <div>
-              <span class="block opacity-[0.7] text-[14px]">
-                Номер телефона
-              </span>
-              <span class="block text-[16px]"> +998 (71) 200 70 07 </span>
-            </div>
-          </div>
-          <div
-            class="group border-[1px] rounded-[12px] w-[100%] text-[white] p-[12px] border-[#ffffff7a] flex items-center gap-[8px] hover:bg-[#CAA244] cursor-pointer duration-500"
-          >
-            <div
-              class="rounded-[8px] bg-[#caa24462] group-hover:bg-[#ffffff66] duration-500 w-[42px] h-[42px] flex items-center justify-center"
-            >
-              <span
-                class="icon-mail text-[30px] text-[#CAA244] group-hover:text-white duration-500"
-              ></span>
-            </div>
-            <div>
-              <span class="block opacity-[0.7] text-[14px]">
-                Электроннная почта
-              </span>
-              <span class="block text-[16px]"> MaryamMahmudova@gmail.com </span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="flex items-center flex-col md:mt-[152px] mt-[50px]">
-        <div
-          class="flex flex-col md:flex-row items-center gap-[24px] text-center md:text-left"
-        >
+      <div class="flex items-center flex-col">
+        <div :class="['text-center',
+          route.path === '/' ? 'flex flex-col md:flex-row items-center gap-[24px]  md:text-left' : ''
+        ]">
           <NuxtLink to="/">
-            <p class="md:text-32 text-xl text-primary uppercase font-medium">
+            <p :class="['md:text-32 text-xl text-primary uppercase font-medium mb-[16px]  p-[10px] rounded-b-[16px]',
+              route.path === '/' ? '' : 'bg-gray-800 max-w-[300px] mx-auto'
+            ]">
               dust storm
             </p>
           </NuxtLink>
-          <p class="w-full md:w-[580px] text-[white]">
-            Внося вклад в развитие фонда, вы делаете жизни тысяч наших сограждан
-            в разы лучше и помогаете им стать на шаг ближе к их целям и мечтам.
+          <p class="w-full md:w-[582px] text-center text-white mb-[24px]">
+            {{ t("Home__Footer__text") }}
           </p>
         </div>
-        <div
-          class="flex flex-col md:flex-row items-center gap-[12px] mt-[15px] text-center md:text-left"
-        >
-          <span class="text-[#ffffff77] block text-sm md:text-base">
-            © OnaFoundation. Все права защищены.
-          </span>
-          <span class="text-[white] block text-sm md:text-base">
-            Политика конфиденциальности
-          </span>
+        <div :class="[
+          'w-full border-[1px] rounded-[8px] px-[12px] py-[8px] border-gray-800 max-w-[711px] md:flex items-center justify-between',
+          route.path === '/' ? '!hidden' : '',
+        ]">
+          <div class="flex items-center gap-[8px]">
+            <span class="icon-phone text-warning-100 text-[22px]"></span>
+            <span class="block text-12 text-white">
+              {{ contactInfo?.phone ? formatPhoneNumber(contactInfo.phone) :
+                formatPhoneNumber('+998970206868') }} </span>
+          </div>
+          <div class="w-full h-[1px] my-[10px] md:my-[0px] md:h-[22px] md:w-[1px] bg-gray-800">
+          </div>
+          <div class="flex items-center gap-[8px] ">
+            <span class="icon-mail text-warning-100 text-[22px]"></span>
+            <span class="block text-12 text-white">
+              {{ contactInfo?.email || 'MaryamMahmudova@gmail.com' }}
+            </span>
+          </div>
+          <div class="w-full h-[1px] my-[10px] md:my-[0px] md:h-[22px] md:w-[1px] bg-gray-800">
+          </div>
+          <a :href="contactInfo?.map_url || '#'" target="_blank">
+            <div class="flex items-center gap-[8px] ">
+              <span class="icon-map-pin-filled text-warning-100 text-[22px]"></span>
+              <span class="block text-12 text-white">
+                {{ contactInfo?.address || t("Contact__location") }}
+              </span>
+            </div>
+          </a>
         </div>
-
         <div class="flex items-center gap-[12px] mt-[12px] mb-[30px]">
-          <a
-            href="https://web.telegram.org/"
-            target="_blank"
+          <a v-for="(item, index) in SocialMedia" :key="index" :href="item.link" target="_blank"
             rel="noopener noreferrer"
-            class="bg-[#ffffff2f] w-[35px] h-[35px] rounded-[50%] text-[white] flex items-center justify-center hover:bg-[#33B34A] hover:text-[white] duration-500"
-          >
-            <span class="icon-telegram"></span>
-          </a>
-          <a
-            href="https://web.telegram.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="bg-[#ffffff2f] w-[35px] h-[35px] rounded-[50%] text-[white] flex items-center justify-center hover:bg-[#33B34A] hover:text-[white] duration-500"
-          >
-            <span class="icon-twitter"></span>
-          </a>
-          <a
-            href="https://twitter.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="bg-[#ffffff2f] w-[35px] h-[35px] rounded-[50%] text-[white] flex items-center justify-center hover:bg-[#33B34A] hover:text-[white] duration-500"
-          >
-            <span class="icon-youtube"></span>
-          </a>
-          <a
-            href="https://www.instagram.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="bg-[#ffffff2f] w-[35px] h-[35px] rounded-[50%] text-[white] flex items-center justify-center hover:bg-[#33B34A] hover:text-[white] duration-500"
-          >
-            <span class="icon-instagram"></span>
+            class="bg-gray-500 w-[35px] h-[35px] rounded-full text-white flex items-center justify-center hover:bg-primary hover:text-white duration-300">
+            <span :class="item.icon" class="flex items-center justify-center w-full h-full"></span>
           </a>
         </div>
       </div>
