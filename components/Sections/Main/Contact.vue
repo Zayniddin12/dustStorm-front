@@ -2,7 +2,16 @@
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
 import { formatPhoneNumber } from '~/utils';
+import { useSupportStore } from '~/Store/store';
 
+const supportStore = useSupportStore();
+const contactInfo = ref<IContactInfo | null>(null);
+onMounted(async () => {
+    if (!supportStore.contactInfo) {
+        await supportStore.getContactInfo();
+    }
+    contactInfo.value = supportStore.contactInfo;
+});
 </script>
 
 <template>
@@ -18,7 +27,7 @@ import { formatPhoneNumber } from '~/utils';
                     </p>
                 </div>
                 <div class="flex items-center flex-col gap-[12px] mt-[36px]">
-                    <div
+                    <a :href="contactInfo?.map_url || '#'" target="_blank"
                         class="group border-[1px] rounded-10 w-[100%] text-white p-[12px] border-gray-400 flex items-center gap-[8px] hover:bg-warning-100 hover:border-white-100 cursor-pointer duration-300">
                         <div
                             class="rounded-10 bg-warning-200 group-hover:bg-gray-400 w-[42px] h-[42px] flex items-center justify-center">
@@ -30,11 +39,12 @@ import { formatPhoneNumber } from '~/utils';
                                 {{ t("Contact__address") }}
                             </span>
                             <span class="block text-[16px]">
-                                {{ t("Contact__location") }}
+                                {{ contactInfo?.address || t("Contact__location") }}
                             </span>
                         </div>
-                    </div>
+                    </a>
 
+                    <!-- Phone Block -->
                     <div
                         class="group border-[1px] rounded-10 w-[100%] text-white p-[12px] border-gray-400 flex items-center gap-[8px] hover:bg-warning-100 hover:border-white-100 cursor-pointer duration-300">
                         <div
@@ -47,10 +57,13 @@ import { formatPhoneNumber } from '~/utils';
                                 {{ t("Contact__phone") }}
                             </span>
                             <span class="block text-16">
-                                {{ formatPhoneNumber('+998970206868') }}
+                                {{ contactInfo?.phone ? formatPhoneNumber(contactInfo.phone) :
+                                formatPhoneNumber('+998970206868') }}
                             </span>
                         </div>
                     </div>
+
+                    <!-- Email Block -->
                     <div
                         class="group border-[1px] rounded-10 w-[100%] text-white p-[12px] border-gray-400 flex items-center gap-[8px] hover:bg-warning-100 hover:border-white-100 cursor-pointer duration-300">
                         <div
@@ -63,7 +76,7 @@ import { formatPhoneNumber } from '~/utils';
                                 {{ t("Contact__email") }}
                             </span>
                             <span class="block text-[16px]">
-                                MaryamMahmudova@gmail.com
+                                {{ contactInfo?.email || 'MaryamMahmudova@gmail.com' }}
                             </span>
                         </div>
                     </div>
