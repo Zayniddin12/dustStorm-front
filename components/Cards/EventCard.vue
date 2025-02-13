@@ -6,16 +6,21 @@
                 {{ title }}
             </h2>
             <p class="text-gray-300 mt-[6px] text-[14px] sm:text-[16px]">
-                {{ paragraph }}
+                {{ truncatedParagraph }}
             </p>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-defineProps<{
+import { computed } from "vue";
+import { truncateText } from "@/utils/index";
+
+const props = defineProps<{
     foto: string;
     title: string;
     paragraph: string;
 }>();
+
+const truncatedParagraph = computed(() => truncateText(props.paragraph, 20));
 </script>

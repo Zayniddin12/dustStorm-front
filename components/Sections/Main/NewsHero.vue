@@ -3,7 +3,7 @@ import NewsCard from "~/components/Cards/NewsCard.vue";
 import { useI18n } from "vue-i18n";
 import { useApi } from "~/composables/useApi";
 import { ref, onMounted, computed } from "vue";
-import NProgress from "nprogress"; // Импортируем NProgress
+import NProgress from "nprogress"; 
 
 const { t } = useI18n();
 const { $get } = useApi();
@@ -37,7 +37,7 @@ const isLoading = ref(false); // Локальный лоадер
 
 const fetchNews = async () => {
     isLoading.value = true;
-    NProgress.start(); // Запускаем NProgress
+    NProgress.start();
     try {
         const res = await $get<NewsResponse>("/news/", {
             params: {
@@ -46,11 +46,15 @@ const fetchNews = async () => {
             },
         });
         newsData.value = res;
+    } catch (error) {
+        console.error("Ошибка при загрузке новостей:", error);
     } finally {
         isLoading.value = false;
-        NProgress.done(); // Завершаем NProgress
+        NProgress.done();
     }
 };
+
+
 
 onMounted(fetchNews);
 const totalPages = computed(() => Math.ceil(newsData.value.count / perPage));
@@ -74,7 +78,7 @@ const formatDate = (date: string) => {
     <section class="pt-5 pb-5 bg-white">
         <div class="mx-auto max-w-[1200px] px-4">
             <h1 class="text-2xl sm:text-3xl font-bold text-dark-200">
-                {{ t("News__title") }}
+                {{ t("InfoArt__Title") }}
             </h1>
             <div v-if="isLoading" class="flex justify-center items-center mt-8 h-screen">
                 <div class="loader"></div>

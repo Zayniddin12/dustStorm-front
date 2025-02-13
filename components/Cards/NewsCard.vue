@@ -5,25 +5,28 @@
         <div
             class="absolute top-[130px] left-4 z-10 bg-gray-800 rounded-xl border border-gray-700 backdrop-blur-md px-2 py-1">
             <span class="text-white text-xs">
-                {{ date }}
+                {{ props.date }}
             </span>
         </div>
         <h2 class="mt-3 mb-1 text-16 font-semibold">
-            {{ title }}
+            {{ props.title }}
         </h2>
         <p class="text-12 text-gray-600">
-            {{ description }}
+            {{ truncatedDescription }}
         </p>
     </div>
 </template>
 
-<script>
-export default {
-    props: {
-        image: String,
-        date: String,
-        title: String,
-        description: String
-    }
-};
+<script setup lang="ts">
+import { computed } from "vue";
+import { truncateText } from "@/utils/index";
+
+const props = defineProps<{
+    image: string;
+    date: string;
+    title: string;
+    description: string;
+}>();
+
+const truncatedDescription = computed(() => truncateText(props.description, 20));
 </script>
