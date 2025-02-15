@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, watch, computed } from 'vue';
 import { Chart } from 'chart.js/auto';
 import { useI18n } from 'vue-i18n';
 import { useSupportStore } from '@/Store/store';
@@ -7,12 +7,17 @@ import { useSupportStore } from '@/Store/store';
 const years = Array.from({ length: 10 }, (_, i) => new Date().getFullYear() - i);
 const selectedYear = ref(null);
 let chartInstance = ref(null);
-const { t } = useI18n();
+const { t, locale } = useI18n();
 const supportStore = useSupportStore();
 
-const generateRadarData = () => {
-    const labels = ['Север', 'Северо-восток', 'Восток', 'Юго-восток', 'Юг', 'Юго-запад', 'Запад', 'Северо-запад'];
+const labelsMap = {
+    ru: ['Север', 'Северо-восток', 'Восток', 'Юго-восток', 'Юг', 'Юго-запад', 'Запад', 'Северо-запад'],
+    uz: ['Shimol', 'Shimoli-sharq', 'Sharq', 'Janubi-sharq', 'Janub', 'Janubi-gʻarb', 'Gʻarb', 'Shimoli-gʻarb'],
+    en: ['North', 'Northeast', 'East', 'Southeast', 'South', 'Southwest', 'West', 'Northwest']
+};
 
+const generateRadarData = () => {
+    const labels = labelsMap[locale.value] || labelsMap.en;
     const data = supportStore.windData.map(item => item.wind_speed ?? 0);
 
     return {
@@ -60,7 +65,8 @@ const initChart = () => {
         }
     });
 };
-watch(selectedYear, async (newYear) => {
+
+watch([selectedYear, locale], async ([newYear]) => {
     if (newYear) {
         await supportStore.getWindAverage(newYear);
         initChart();
@@ -68,9 +74,10 @@ watch(selectedYear, async (newYear) => {
 });
 
 onMounted(() => {
-    selectedYear.value = years[0]; 
+    selectedYear.value = years[0];
 });
 </script>
+
 
 <template>
     <section class="bg-gray-200 py-[30px]">

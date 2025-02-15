@@ -17,7 +17,7 @@ export const useSupportStore = defineStore('support-store', {
         async getContactInfo() {
             this.isLoading = true;
             try {
-                const response = await useApi().$get<IContactInfo>('/contact/');
+                const response = await useApi().$get<IContactInfo>('/api/main/contact/');
                 this.contactInfo = response;
                 return response;
             } catch (error) {
@@ -32,7 +32,7 @@ export const useSupportStore = defineStore('support-store', {
             this.isLoading = true;
             try {
                 const response = await useApi().$get<{ year: string, data: { wind_direction_id: number, wind_speed: number | null, wind_repeat: number }[] }>(
-                    `/wind-average/?year=${year}`
+                    `/api/main/wind-average/?year=${year}`
                 );
                 this.windData = response.data;
                 return response.data;

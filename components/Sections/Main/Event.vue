@@ -8,6 +8,7 @@ import { NuxtLink } from '#components';
 
 const { t } = useI18n();
 const { $get } = useApi();
+const { locale } = useI18n()
 
 interface NewsItem {
     id: number;
@@ -17,13 +18,14 @@ interface NewsItem {
     created_at: string;
     slug: string;
 }
+
 const newsData = ref<NewsItem[]>([]);
 const isLoading = ref(false);
 const fetchNews = async () => {
     isLoading.value = true;
     NProgress.start();
     try {
-        const res = await $get<{ results: NewsItem[] }>("/news/", {
+        const res = await $get<{ results: NewsItem[] }>(`${locale.value}/api/main/news/`, {
             params: {
                 page: 1,
                 page_size: 4,
