@@ -45,24 +45,28 @@ onMounted(async () => {
           'w-full border-[1px] rounded-[8px] px-[12px] py-[8px] border-gray-800 max-w-[711px] md:flex items-center justify-between',
           route.path === '/' ? '!hidden' : '',
         ]">
-          <div class="flex items-center gap-[8px]">
+          <!-- Телефон -->
+          <a :href="'tel:' + (contactInfo?.phone || '+998970206868')" class="flex items-center gap-[8px]">
             <span class="icon-phone text-warning-100 text-[22px]"></span>
             <span class="block text-12 text-white">
-              {{ contactInfo?.phone ? formatPhoneNumber(contactInfo.phone) :
-                formatPhoneNumber('+998970206868') }} </span>
-          </div>
-          <div class="w-full h-[1px] my-[10px] md:my-[0px] md:h-[22px] md:w-[1px] bg-gray-800">
-          </div>
-          <div class="flex items-center gap-[8px] ">
+              {{ contactInfo?.phone ? formatPhoneNumber(contactInfo.phone) : formatPhoneNumber('+998970206868') }}
+            </span>
+          </a>
+          <div class="w-full h-[1px] my-[10px] md:my-[0px] md:h-[22px] md:w-[1px] bg-gray-800"></div>
+
+          <!-- Email -->
+          <a :href="'mailto:' + (contactInfo?.email || 'MaryamMahmudova@gmail.com')"
+            class="flex items-center gap-[8px]">
             <span class="icon-mail text-warning-100 text-[22px]"></span>
             <span class="block text-12 text-white">
               {{ contactInfo?.email || 'MaryamMahmudova@gmail.com' }}
             </span>
-          </div>
-          <div class="w-full h-[1px] my-[10px] md:my-[0px] md:h-[22px] md:w-[1px] bg-gray-800">
-          </div>
+          </a>
+          <div class="w-full h-[1px] my-[10px] md:my-[0px] md:h-[22px] md:w-[1px] bg-gray-800"></div>
+
+          <!-- Адрес -->
           <a :href="contactInfo?.map_url || '#'" target="_blank">
-            <div class="flex items-center gap-[8px] ">
+            <div class="flex items-center gap-[8px]">
               <span class="icon-map-pin-filled text-warning-100 text-[22px]"></span>
               <span class="block text-12 text-white">
                 {{ contactInfo?.address || t("Contact__location") }}

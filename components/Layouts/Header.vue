@@ -10,13 +10,14 @@
         </p>
       </NuxtLink>
       <ul class="md:flex hidden ml-[97px] gap-4">
-        <li v-for="(item, key) in headerMenu" :key
+        <li v-for="(item, key) in headerMenu" :key="item.slug || key"
           class="text-sm font-medium leading-[17px] transition-300 hover:text-primary cursor-pointer">
-          <NuxtLinkLocale :to="item?.slug">
-            {{ item?.title }}
-          </NuxtLinkLocale>
+          <NuxtLink :to="item.slug">
+            {{ item.title }}
+          </NuxtLink>
         </li>
       </ul>
+
       <div class="ml-auto flex items-center">
         <div class="md:ml-5 flex items-center gap-x-4">
           <div class="flex-y-center gap-2 lg:mr-2">
@@ -38,34 +39,72 @@
 </template>
 
 <script lang="ts" setup>
-import { useI18n } from 'vue-i18n'
+import { ref, computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { useRouter } from 'vue-router';
 
-import { headerMenu } from '~/data'
-
-const { t } = useI18n()
-const isShown = ref(false)
-const showLogoutModal = ref(false)
-const router = useRouter()
-const isClicked = ref(false)
-const showSearch = ref(false)
+const { t, locale } = useI18n();
+const isShown = ref(false);
+const showLogoutModal = ref(false);
+const showSearch = ref(false);
+const router = useRouter();
 
 const showMobileHeader = () => {
   if (process.client) {
-    document.body.style.overflow = 'hidden'
-    isShown.value = true
+    document.body.style.overflow = 'hidden';
+    isShown.value = true;
   }
-}
+};
 
 const onCloseMobileHeader = () => {
   if (process.client) {
-    document.body.style.overflow = 'auto'
-    isShown.value = false
+    document.body.style.overflow = 'auto';
+    isShown.value = false;
   }
-}
+};
 
 const close = () => {
-  showLogoutModal.value = false
-}
+  showLogoutModal.value = false;
+};
+
+const navigateTo = (path: string) => {
+  router.push(path);
+};
+
+const headerMenuRu = [
+  { id: 1, title: 'Программы', slug: '/programs' },
+  { id: 2, title: 'Гранты', slug: '/grants' },
+  { id: 3, title: 'Услуги', slug: '/services' },
+  { id: 4, title: 'Новости', slug: '/news' },
+  { id: 5, title: 'Контакты', slug: '/contact' },
+];
+
+const headerMenuEn = [
+  { id: 1, title: 'Programs', slug: '/programs' },
+  { id: 2, title: 'Grants', slug: '/grants' },
+  { id: 3, title: 'Services', slug: '/services' },
+  { id: 4, title: 'News', slug: '/news' },
+  { id: 5, title: 'Contact', slug: '/contact' },
+];
+
+const headerMenuUz = [
+  { id: 1, title: 'Dasturlar', slug: '/programs' },
+  { id: 2, title: 'Grantlar', slug: '/grants' },
+  { id: 3, title: 'Xizmatlar', slug: '/services' },
+  { id: 4, title: 'Yangiliklar', slug: '/news' },
+  { id: 5, title: 'Kontaktlar', slug: '/contact' },
+];
+
+const headerMenu = computed(() => {
+  switch (locale.value) {
+    case 'ru':
+      return headerMenuRu;
+    case 'uz':
+      return headerMenuUz;
+    default:
+      return headerMenuEn;
+  }
+});
 </script>
 
 <style scoped>
