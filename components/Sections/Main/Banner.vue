@@ -77,7 +77,7 @@ onUnmounted(() => {
       </div>
     </div>
     <div class="bg-image absolute w-full h-full z-1">
-      <img :alt="banner.title" :src="banner.image_url" />
+      <img :alt="banner.title" :src="banner.image" />
     </div>
   </main>
 </template>
