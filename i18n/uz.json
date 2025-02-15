@@ -2,6 +2,7 @@
   "lang": "uz",
   "InfoArt__Title": "Ma'lumot va maqolalar",
   "InfoArt__btn": "Barcha maqolalar",
+  "contact_us_btn": "Kontaktlar",
   "Contact__title": "Biz bilan bog'lanish",
   "Contact__text": "Chiqish mumkin bo'lgan quyidagi usullardan foydalanib biz bilan bog'laning",
   "Contact__address": "Ofisimizga tashrif buyuring:",
@@ -18,5 +19,9 @@
   "SeaAral__text": "Orol dengizi hozirgi zamonning eng yirik ekologik ofatlaridan biridir. So'nggi o'n yilliklarda uning maydoni bir necha barobar qisqardi, bu esa jiddiy iqlimiy, iqtisodiy va ijtimoiy oqibatlarga olib keldi. Bugungi kunda hududni tiklash, yanada tanazzulga uchrashining oldini olish maqsadida turli chora-tadbirlar amalga oshirilmoqda. Orol dengizini saqlab qolish va ekologik tashabbuslarni qo'llab-quvvatlashga qanday yordam berishingiz mumkinligini bilib oling.",
   "Chart__title": "Yillik shamol traektoriyasi",
   "Chart__text": "Orol dengizi hozirgi zamonning eng yirik ekologik ofatlaridan biridir. So'nggi o'n yilliklarda uning maydoni bir necha barobar qisqardi, bu esa jiddiy iqlimiy, iqtisodiy va ijtimoiy oqibatlarga olib keldi. Bugungi kunda hududni tiklash, yanada tanazzulga uchrashining oldini olish maqsadida turli chora-tadbirlar amalga oshirilmoqda. Orol dengizini saqlab qolish va ekologik tashabbuslarni qo'llab-quvvatlashga qanday yordam berishingiz mumkinligini bilib oling.",
-  "Chart__select": "Yilni tanlang"
+  "Chart__select": "Yilni tanlang",
+  "more": "Batafsil",
+  "Report__Title": "Hisobotlar",
+  "Report__btn": "Hammasini ko'rish",
+  "Download": "Yuklab olish"
 }
