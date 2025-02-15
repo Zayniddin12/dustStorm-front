@@ -37,7 +37,6 @@ import { ref, onMounted } from 'vue';
 import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import CardsReport from '@/components/Cards/Report.vue';
-import NProgress from "nprogress";
 import { useI18n } from "vue-i18n";
 const { t } = useI18n();
 
