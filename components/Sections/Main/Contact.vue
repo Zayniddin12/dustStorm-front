@@ -10,7 +10,7 @@ onMounted(async () => {
     if (!supportStore.contactInfo) {
         await supportStore.getContactInfo();
     }
-    contactInfo.value = supportStore.contactInfo;
+    contactInfo.value = supportStore.contactInfo
 });
 </script>
 
@@ -45,7 +45,7 @@ onMounted(async () => {
                     </a>
 
                     <!-- Phone Block -->
-                    <div
+                    <a :href="'tel:' + (contactInfo?.phone || '+998970206868')"
                         class="group border-[1px] rounded-10 w-[100%] text-white p-[12px] border-gray-400 flex items-center gap-[8px] hover:bg-warning-100 hover:border-white-100 cursor-pointer duration-300">
                         <div
                             class="rounded-10 bg-warning-200 group-hover:bg-gray-400 duration-300  w-[42px] h-[42px] flex items-center justify-center">
@@ -58,13 +58,13 @@ onMounted(async () => {
                             </span>
                             <span class="block text-16">
                                 {{ contactInfo?.phone ? formatPhoneNumber(contactInfo.phone) :
-                                formatPhoneNumber('+998970206868') }}
+                                    formatPhoneNumber('+998970206868') }}
                             </span>
                         </div>
-                    </div>
+                    </a>
 
                     <!-- Email Block -->
-                    <div
+                    <a :href="'mailto:' + (contactInfo?.email || 'MaryamMahmudova@gmail.com')"
                         class="group border-[1px] rounded-10 w-[100%] text-white p-[12px] border-gray-400 flex items-center gap-[8px] hover:bg-warning-100 hover:border-white-100 cursor-pointer duration-300">
                         <div
                             class="rounded-10 bg-warning-200 group-hover:bg-gray-400 duration-300  w-[42px] h-[42px] flex items-center justify-center">
@@ -79,7 +79,7 @@ onMounted(async () => {
                                 {{ contactInfo?.email || 'MaryamMahmudova@gmail.com' }}
                             </span>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>

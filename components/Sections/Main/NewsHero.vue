@@ -3,10 +3,11 @@ import NewsCard from "~/components/Cards/NewsCard.vue";
 import { useI18n } from "vue-i18n";
 import { useApi } from "~/composables/useApi";
 import { ref, onMounted, computed } from "vue";
-import NProgress from "nprogress"; 
+import NProgress from "nprogress";
 
 const { t } = useI18n();
 const { $get } = useApi();
+const { locale } = useI18n()
 
 interface NewsItem {
     id: number;
@@ -39,7 +40,7 @@ const fetchNews = async () => {
     isLoading.value = true;
     NProgress.start();
     try {
-        const res = await $get<NewsResponse>("/news/", {
+        const res = await $get<NewsResponse>(`${locale.value}/api/main/news/`, {
             params: {
                 page: currentPage.value,
                 page_size: perPage,
