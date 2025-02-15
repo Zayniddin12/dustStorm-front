@@ -1,6 +1,7 @@
 <template>
   <div>
     <SectionsMain />
+    <SectionsReport />
     <Event />
     <Contact />
   </div>

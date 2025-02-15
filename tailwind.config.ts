@@ -35,22 +35,23 @@ export default <Partial<Config>>{
         dark: {
           DEFAULT: '#18181B',
           100: '#002734',
-          200: '#10161C'
+          200: '#10161C',
+          300: '#000000',
         },
         white: {
           DEFAULT: '#FFFFFF',
           100: '#FFFFFF29',
           200: '#D6E3D8',
-          300: '#F8F9FA'
+          300: '#F8F9FA',
         },
         warning: {
           DEFAULT: '#FFB900',
-          100: "#CAA244",
-          200: "#caa24462"
+          100: '#CAA244',
+          200: '#caa24462',
         },
         green: {
           DEFAULT: '#0BB43B',
-          100: '#1b4b2b77'
+          100: '#1b4b2b77',
         },
         gray: {
           DEFAULT: '#FAFAFA',
@@ -61,15 +62,20 @@ export default <Partial<Config>>{
           500: '#ffffff2f',
           600: '#707377',
           700: '#FFFFFF33',
-          800: '#FFFFFF1A'
+          800: '#FFFFFF1A',
         },
         red: {
           DEFAULT: '#E04A36',
         },
-
+      },
+      boxShadow: {
+        card: '0px 4px 4px 0px #00000040',
+      },
+      backgroundImage: {
+        gradient: 'linear-gradient(180deg, #33B34A 0%, #10161C 100%)',
       },
       borderRadius: {
-        8: "8px",
+        8: '8px',
         10: '10px',
         16: '16px',
         20: '20px',
@@ -79,6 +85,7 @@ export default <Partial<Config>>{
       fontSize: {
         12: '12px',
         16: '16px',
+        20: '20px',
         32: '32px',
         44: '44px',
       },

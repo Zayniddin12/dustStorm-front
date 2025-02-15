@@ -120,7 +120,7 @@ getListBanners()
   padding-left: 1rem;
   padding-right: 40%;
 }
-.swiper .swiper-pagination-bullets {
+.swiper .swiper-pagi0nation-bullets {
   width: 437px;
   position: absolute;
   z-index: 4;
