@@ -26,7 +26,7 @@ const props = defineProps({
 
 const truncatedTitle = computed(() => {
   const words = props.report.title.split(' ');
-  return words.length > 5 ? words.slice(0, 5).join(' ') + '...' : props.report.title;
+  return words.length > 3 ? words.slice(0, 3).join(' ') + '...' : props.report.title;
 });
 
 function formatFileSize(size: number) {
