@@ -6,7 +6,6 @@ export const useApi = (apiUrl?: string) => {
   const locale = useCookie('locale')
   const loading = ref(false)
 
-
   function $service(options?: FetchOptions) {
     return $fetch.create({
       ...options,
@@ -17,7 +16,6 @@ export const useApi = (apiUrl?: string) => {
       },
     })
   }
-
 
   function $get<T = never>(
     endpoint: NitroFetchRequest,

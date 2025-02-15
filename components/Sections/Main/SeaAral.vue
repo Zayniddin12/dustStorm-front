@@ -16,7 +16,7 @@ const cleanedTitle = computed(() => {
 });
 </script>
 <template>
-    <section>
+    <section class="mt-[140px] mb-[70px]">
         <div class="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-10 mb-6">
                 <div class="max-w-[556px] w-full text-left md:text-left">

@@ -71,7 +71,7 @@ import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { useI18n } from 'vue-i18n'
 
-import { IBanner, IResponse } from '~/types/common'
+import type { IBanner, IResponse } from '~/types/common'
 
 const progressCircle = ref<SVGElement | null>(null)
 const progressContent = ref<HTMLElement | null>(null)
@@ -84,7 +84,7 @@ const onAutoplayTimeLeft = (s: any, time: number, progress: number) => {
     progressContent.value.textContent = `${Math.ceil(time / 1000)}s`
   }
 }
-
+const { locale } = useI18n()
 const banners = ref<IBanner[]>()
 
 const settings = {
@@ -103,16 +103,9 @@ const settings = {
 
 async function getListBanners() {
   await useApi()
-    .$get<IResponse<IBanner>>(
-      '/development/params/background.image/advanced_list',
-      {
-        params: {
-          specification: { id: {}, title: {}, description: {}, image_url: {} },
-        },
-      }
-    )
+    .$get<IResponse<IBanner>>(`${locale.value}/api/main/main-slide/`)
     .then((res) => {
-      banners.value = res?.records
+      banners.value = res
     })
 }
 
@@ -127,7 +120,7 @@ getListBanners()
   padding-left: 1rem;
   padding-right: 40%;
 }
-.swiper .swiper-pagination-bullets {
+.swiper .swiper-pagi0nation-bullets {
   width: 437px;
   position: absolute;
   z-index: 4;

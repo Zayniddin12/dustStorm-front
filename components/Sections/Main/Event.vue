@@ -42,7 +42,7 @@ const fetchNews = async () => {
 onMounted(fetchNews);
 </script>
 <template>
-    <section class="bg-gray-200 mb-[50px] py-[30px]">
+    <section class="bg-gray-200  py-[30px]">
         <div class="mx-auto max-w-[1200px] px-[15px]">
             <div class="flex flex-col sm:flex-row justify-between mb-[24px]">
                 <h1 class="text-primary text-[24px] sm:text-[32px] sm:text-left">

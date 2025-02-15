@@ -11,5 +11,5 @@ export interface IBanner {
   id: number
   title: string
   description: string
-  image_url: string
+  image: string
 }
