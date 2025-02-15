@@ -35,7 +35,8 @@ export default <Partial<Config>>{
         dark: {
           DEFAULT: '#18181B',
           100: '#002734',
-          200: '#10161C'
+          200: '#10161C',
+          300: '#1C1F20'
         },
         white: {
           DEFAULT: '#FFFFFF',
@@ -72,12 +73,15 @@ export default <Partial<Config>>{
         8: "8px",
         10: '10px',
         16: '16px',
+        14: '14px',
         20: '20px',
+        24: '24px',
         28: '28px',
         32: '32px',
       },
       fontSize: {
         12: '12px',
+        14: '14px',
         16: '16px',
         32: '32px',
         44: '44px',

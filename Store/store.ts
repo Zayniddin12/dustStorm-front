@@ -11,22 +11,37 @@ export const useSupportStore = defineStore('support-store', {
         isLoading: false as boolean,
         supportWomenLoading: false as boolean,
         error: null,
+        windData: [] as { wind_direction_id: number, wind_speed: number | null, wind_repeat: number }[]
     }),
     actions: {
         async getContactInfo() {
-            this.isLoading = true
+            this.isLoading = true;
             try {
-                const response = await useApi().$get<IContactInfo>(
-                    '/contact/',
-                )
-                this.contactInfo = response
-                return response
+                const response = await useApi().$get<IContactInfo>('/contact/');
+                this.contactInfo = response;
+                return response;
             } catch (error) {
-                console.error(error)
-                return null
+                console.error(error);
+                return null;
             } finally {
-                this.isLoading = false
+                this.isLoading = false;
             }
         },
-    },
-})
+
+        async getWindAverage(year: number) {
+            this.isLoading = true;
+            try {
+                const response = await useApi().$get<{ year: string, data: { wind_direction_id: number, wind_speed: number | null, wind_repeat: number }[] }>(
+                    `/wind-average/?year=${year}`
+                );
+                this.windData = response.data;
+                return response.data;
+            } catch (error) {
+                console.error(error);
+                return [];
+            } finally {
+                this.isLoading = false;
+            }
+        }
+    }
+});

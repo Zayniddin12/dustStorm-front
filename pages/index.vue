@@ -17,6 +17,8 @@
     <span class="icon-close"></span>
     <span class="icon-burger"></span>
     <SectionsMain />
+    <SeaAral />
+    <AnnualChart />
     <Event />
     <Contact />
 
@@ -25,4 +27,6 @@
 <script setup lang="ts">
 import Event from '@/components/Sections/Main/Event.vue'
 import Contact from '@/components/Sections/Main/Contact.vue'
+import SeaAral from '@/components/Sections/Main/SeaAral.vue'
+import AnnualChart from '@/components/Sections/Main/AnnualChart.vue'
 </script>

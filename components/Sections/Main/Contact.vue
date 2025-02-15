@@ -10,7 +10,7 @@ onMounted(async () => {
     if (!supportStore.contactInfo) {
         await supportStore.getContactInfo();
     }
-    contactInfo.value = supportStore.contactInfo;
+    contactInfo.value = supportStore.contactInfo
 });
 </script>
 

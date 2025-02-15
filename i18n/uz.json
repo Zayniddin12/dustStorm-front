@@ -13,5 +13,10 @@
     "ErrorPage__title": "Siz qidirayotgan sahifa oʻchirilgan, nomi oʻzgartirilgan yoki vaqtincha mavjud boʻlmagan boʻlishi mumkin.",
     "Go_to_Homepage": "Bosh sahifaga o'tish",
     "About_Us": "Biz haqimizda",
-    "News__title": "Yangiliklar"
+    "News__title": "Yangiliklar",
+    "SeaAral__title": "`Orol` dengizini qanday qutqarish mumkin?",
+    "SeaAral__text": "Orol dengizi hozirgi zamonning eng yirik ekologik ofatlaridan biridir. So'nggi o'n yilliklarda uning maydoni bir necha barobar qisqardi, bu esa jiddiy iqlimiy, iqtisodiy va ijtimoiy oqibatlarga olib keldi. Bugungi kunda hududni tiklash, yanada tanazzulga uchrashining oldini olish maqsadida turli chora-tadbirlar amalga oshirilmoqda. Orol dengizini saqlab qolish va ekologik tashabbuslarni qo'llab-quvvatlashga qanday yordam berishingiz mumkinligini bilib oling.",
+    "Chart__title": "Yillik shamol traektoriyasi",
+    "Chart__text": "Orol dengizi hozirgi zamonning eng yirik ekologik ofatlaridan biridir. So'nggi o'n yilliklarda uning maydoni bir necha barobar qisqardi, bu esa jiddiy iqlimiy, iqtisodiy va ijtimoiy oqibatlarga olib keldi. Bugungi kunda hududni tiklash, yanada tanazzulga uchrashining oldini olish maqsadida turli chora-tadbirlar amalga oshirilmoqda. Orol dengizini saqlab qolish va ekologik tashabbuslarni qo'llab-quvvatlashga qanday yordam berishingiz mumkinligini bilib oling.",
+    "Chart__select": "Yilni tanlang"
 }
