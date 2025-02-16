@@ -22,7 +22,7 @@
         <a :href="downloadUrl"
             class="border-primary border-[2px] duration-300 hover:text-primary hover:bg-transparent flex items-center justify-center py-[11px] mt-[24px] cursor-pointer w-full bg-primary text-white rounded-24">
             <span>
-                {{ $t('Download') }}
+                {{ t('Download') }}
             </span>
         </a>
     </div>

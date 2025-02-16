@@ -13,3 +13,22 @@ export interface IBanner {
   description: string
   image: string
 }
+
+export interface IReport {
+  title: string
+  file: string
+  file_size: number
+  file_type: string
+}
+export interface IContactInfo {
+  email: string
+  phone: number
+  address: string
+  latitude: number
+  longitude: number
+  social: {
+    name: string
+    url: string
+    icon: string
+  }[]
+}

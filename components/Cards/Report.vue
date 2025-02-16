@@ -6,7 +6,10 @@
     <p class="font-normal text-20 leading-130 text-dark-100 my-4">
       {{ truncatedTitle }}
     </p>
-    <a class="flex gap-1 items-center text-primary text-base leading-130" :href="report.file">
+    <a
+      class="flex gap-1 items-center text-primary text-base leading-130"
+      :href="report.file"
+    >
       {{ $t('more') }}
       <span class="icon-chevron text-2xl rotate-[180deg]"></span>
     </a>
@@ -15,23 +18,24 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import type { IReport } from '@/types/common'
 
-const props = defineProps({
-  report: {
-    type: Object,
-    required: true
-  }
-});
+interface Props {
+  report: IReport
+}
+
+const props = defineProps<Props>()
 
 const truncatedTitle = computed(() => {
-  const words = props.report.title.split(' ');
-  return words.length > 3 ? words.slice(0, 3).join(' ') + '...' : props.report.title;
-});
+  const words = props.report.title.split(' ')
+  return words.length > 3
+    ? words.slice(0, 3).join(' ') + '...'
+    : props.report.title
+})
 
 function formatFileSize(size: number) {
-  if (size < 1024) return `${size} B`;
-  if (size < 1024 * 1024) return `${(size / 1024).toFixed(1)} KB`;
-  return `${(size / 1024 / 1024).toFixed(1)} MB`;
+  if (size < 1024) return `${size} B`
+  if (size < 1024 * 1024) return `${(size / 1024).toFixed(1)} KB`
+  return `${(size / 1024 / 1024).toFixed(1)} MB`
 }
 </script>
