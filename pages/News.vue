@@ -1,8 +1,8 @@
-<script setup lang="ts">
-import NewsHero from '~/components/Sections/Main/NewsHero.vue';
+<!-- <script setup lang="ts">
+    import NewsHero from '~/components/Sections/Main/NewsHero.vue';
 
-</script>
+    </script> -->
 
 <template>
-    <NewsHero />
+  <div>kcvferferfk</div>
 </template>

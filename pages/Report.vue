@@ -1,9 +1,10 @@
 <template>
-    <main clas>
-        <ReportHero />
-    </main>
+  <main>
+    rekgjerg
+    <!-- <ReportHero /> -->
+  </main>
 </template>
 
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 import ReportHero from '@/components/Sections/Report/ReportHero.vue'
-</script>
+</script> -->

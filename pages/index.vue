@@ -1,11 +1,11 @@
 <template>
   <div>
     <SectionsMain />
-    <SeaAral />
+    <!-- <SeaAral />
     <AnnualChart />
     <Event />
     <SectionsReport />
-    <Contact />
+    <Contact /> -->
   </div>
 </template>
 <script setup lang="ts">
