@@ -1,21 +1,23 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
-import { formatPhoneNumber } from '~/utils';
-import { useSupportStore } from '~/Store/store';
+import { formatPhoneNumber } from '@/utils/index.ts';
+import { useSupportStore } from '@/Store/store.ts';
 
 const supportStore = useSupportStore();
 const contactInfo = ref<IContactInfo | null>(null);
 onMounted(async () => {
+
     if (!supportStore.contactInfo) {
         await supportStore.getContactInfo();
     }
     contactInfo.value = supportStore.contactInfo
 });
+
 </script>
 
 <template>
-    <section class="bg-primary pb-[10px] pt-[50px]">
+    <div class="pb-[180px] pt-[50px]">
         <div class="mx-auto max-w-[1200px] px-[15px]">
             <div class="bg-green-100 w-[100%] sm:p-[64px] p-[20px] rounded-10">
                 <div>
@@ -83,5 +85,5 @@ onMounted(async () => {
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 </template>

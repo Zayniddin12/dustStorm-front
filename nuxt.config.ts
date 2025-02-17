@@ -88,11 +88,13 @@ export default defineNuxtConfig({
       },
     ],
     [
+      'yandex-metrika-module-nuxt3',
       {
         id: 98656039,
         webvisor: true,
       },
     ],
+    'vue-yandex-maps/nuxt',
   ],
 
   // site: {
