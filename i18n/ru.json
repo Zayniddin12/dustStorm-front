@@ -23,5 +23,9 @@
     "more": "Подробнее",
     "Report__Title": "Отчеты",
     "Report__btn": "Посмотреть все",
-    "Download": "Скачать"
+    "Download": "Скачать",
+    "for_today": "Ветер и влажность",
+    "for_all_time": "Скорость ветра",
+    "attendance": "Посещаемость",
+    "graphic_attendance": "График посещаемости пользователей"
 }

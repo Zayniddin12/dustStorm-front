@@ -22,6 +22,11 @@
   "Chart__text": "The Aral Sea is one of the largest environmental disasters of our time. Over the past decades, its area has decreased several times, which has led to serious climatic, economic and social consequences. Today, various measures are being taken to restore the region and prevent further degradation. Find out how you can help preserve the Aral Sea and support environmental initiatives.",
   "Chart__select": "Select year",
   "more": "More details",
-  "Report__Title":"Reports",
-  "Report__btn":"View all",
-  "Download":"Download"}
+  "Report__Title": "Reports",
+  "Report__btn": "View all",
+  "Download": "Download",
+  "for_today": "Wind humidity",
+  "for_all_time": "Wind speed",
+  "attendance": "Attendance",
+  "graphic_attendance": "User attendance chart"
+}

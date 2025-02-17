@@ -23,5 +23,9 @@
   "more": "Batafsil",
   "Report__Title": "Hisobotlar",
   "Report__btn": "Hammasini ko'rish",
-  "Download": "Yuklab olish"
+  "Download": "Yuklab olish",
+  "for_today": "Shamol va namlik",
+  "for_all_time": "Shamol tezligi",
+  "attendance": "Davomad",
+  "graphic_attendance": "Foydalanuvchilar davomati grafigi"
 }
