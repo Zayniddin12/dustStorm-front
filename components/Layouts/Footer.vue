@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { NuxtLink } from '#components';
 import { useI18n } from 'vue-i18n';
-import { SocialMedia } from '~/data/SocialMedia';
 import { useRoute } from 'vue-router';
 import { formatPhoneNumber } from '@/utils/index.ts';
 import { useSupportStore } from '~/Store/store';
