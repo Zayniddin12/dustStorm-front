@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { NuxtLink } from '#components';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
 import { formatPhoneNumber } from '@/utils/index.ts';
 import { useSupportStore } from '~/Store/store';
-import Contact from '@/components/Sections/Main/Contact.vue';
+import Contact from '../Sections/Main/Contact.vue';
 
 const { t } = useI18n();
 const route = useRoute();
@@ -18,7 +17,6 @@ onMounted(async () => {
   }
   contactInfo.value = supportStore.contactInfo;
 });
-
 </script>
 
 <template>
@@ -27,13 +25,14 @@ onMounted(async () => {
     route.path === '/' ? 'bg-gradient-to-b pt-[50px]' : 'bg-gradient-to-r'
   ]">
     <Contact v-if="route.path === '/'" />
+
     <div class="mx-auto max-w-[1200px] px-[15px]">
       <div class="flex items-center flex-col">
         <div :class="['text-center',
-          route.path === '/' ? 'flex flex-col md:flex-row items-center gap-[24px]  md:text-left' : ''
+          route.path === '/' ? 'flex flex-col md:flex-row items-center gap-[24px] md:text-left' : ''
         ]">
           <NuxtLink to="/">
-            <p :class="['md:text-32 text-xl text-primary uppercase font-medium mb-[16px]  p-[10px] rounded-b-[16px]',
+            <p :class="['md:text-32 text-xl text-primary uppercase font-medium mb-[16px] p-[10px] rounded-b-[16px]',
               route.path === '/' ? '' : 'bg-gray-800 max-w-[300px] mx-auto'
             ]">
               dust storm
@@ -43,6 +42,7 @@ onMounted(async () => {
             {{ t("Home__Footer__text") }}
           </p>
         </div>
+
         <div :class="[
           'w-full border-[1px] rounded-[8px] px-[12px] py-[8px] border-gray-800 max-w-[711px] md:flex items-center justify-between',
           route.path === '/' ? '!hidden' : '',

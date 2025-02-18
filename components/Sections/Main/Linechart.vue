@@ -1,22 +1,21 @@
 <script lang="ts" setup>
-import { reactive, ref, computed } from "vue";
+import { reactive, ref, computed, onMounted } from "vue";
 import ApexChart from "vue3-apexcharts";
 import CCard from "@/components/Cards/CCard.vue";
 import Tab from "@/components/Tab/CTab.vue";
+import { useSupportStore } from '@/Store/store';
 import { useI18n } from "vue-i18n";
+
 const { t } = useI18n();
+const supportStore = useSupportStore();
 
 const tabList = reactive([
     {
-        label: t("for_today"),
-        value: "today",
-    },
-    {
         label: t("for_all_time"),
-        value: "all",
-    },
+        value: "wind",
+    }
 ]);
-const tabValue = ref("today");
+const tabValue = ref("wind");
 
 const options = reactive({
     chart: {
@@ -60,26 +59,44 @@ const options = reactive({
         curve: "smooth",
     },
     xaxis: {
-        offsetY: -3,
-        offsetX: 8,
+        type: 'numeric',
+        labels: {
+            show: true,
+            formatter: (val) => Math.round(val).toString()
+        },
         tooltip: {
             enabled: false,
         },
+        tickAmount: 6
+    },
+    yaxis: {
+        labels: {
+            show: true,
+            formatter: (val) => val.toFixed(2)
+        },
+        tickAmount: 5
     }
 });
 
-const chartData = {
-    today: [10, 20, 30, 40, 50],
-    all: [5, 15, 25, 35, 45]
-};
+const windData = ref([]);
 
-const series = computed(() => [{
-    name: tabValue.value === 'today' ? 'Today' : 'All Time',
-    data: tabValue.value === 'today' ? chartData.today : chartData.all
-}]);
+onMounted(async () => {
+    try {
+        const response = await supportStore.getWindSpeedAvg();
+        if (response?.series?.[0]?.data) {
+            windData.value = response.series[0].data;
+        }
+    } catch (error) {
+        console.error('Failed to fetch wind speed data:', error);
+    }
+});
 
-console.log(options);
-console.log(series);
+const series = computed(() => {
+    return windData.value.length > 0
+        ? [{ name: t("for_all_time"), data: windData.value }]
+        : [{ name: t("for_all_time"), data: [0] }]; // Заглушка для пустых данных
+});
+
 </script>
 
 <template>
@@ -95,12 +112,13 @@ console.log(series);
                             {{ $t("graphic_attendance") }}
                         </p>
                     </div>
-                    <!-- <Tab :list="tabList" :model-value="tabValue" @update:model-value="tabValue = $event"
-                        class="space-x-3 border-none" item-class="!pt-0 whitespace-nowrap" /> -->
+                    <Tab :list="tabList" :model-value="tabValue" @update:model-value="tabValue = $event"
+                        class="space-x-3 border-none" item-class="!pt-0 whitespace-nowrap" />
                 </div>
-                <div class="h-[280px]">
+                <div v-if="series[0]?.data?.length">
                     <ApexChart :options="options" :series="series" height="280px" />
                 </div>
+
                 <div v-if="!series[0].data.length">
                     <NoData :title="$t('empty_data')" class="mt-8" image="/svg/empty-state.svg" />
                 </div>
