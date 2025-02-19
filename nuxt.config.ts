@@ -1,4 +1,5 @@
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
+import { defineNuxtConfig } from 'nuxt/config'
 export default defineNuxtConfig({
   ssr: true,
 
@@ -80,10 +81,8 @@ export default defineNuxtConfig({
       '@pinia/nuxt',
       {
         autoImports: [
-          // automatically imports `defineStore`
-          'defineStore', // import { defineStore } from 'pinia'
-          // automatically imports `defineStore` as `definePiniaStore`
-          ['defineStore', 'definePiniaStore'], // import { defineStore as definePiniaStore } from 'pinia'
+          'defineStore', // defineStore avtomatik import qilinadi
+          ['defineStore', 'definePiniaStore'], // defineStore 'definePiniaStore' nomi bilan import qilinadi
         ],
       },
     ],
@@ -140,9 +139,13 @@ export default defineNuxtConfig({
   css: ['@/assets/tailwind.css'],
 
   build: {
-    transpile: ['vue-toastification'],
+    transpile: ['vue-toastification', 'vue3-apexcharts'],
   },
-
+  vite: {
+    optimizeDeps: {
+      include: ['apexcharts'],
+    },
+  },
   runtimeConfig: {
     public: {
       baseURL: process.env.VITE_API_BASE_URL || 'localhost',
