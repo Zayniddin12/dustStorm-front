@@ -1,19 +1,16 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
-import { formatPhoneNumber } from '@/utils/index.ts';
 import { useSupportStore } from '@/Store/store.ts';
 
 const supportStore = useSupportStore();
 const contactInfo = ref<IContactInfo | null>(null);
 onMounted(async () => {
-
     if (!supportStore.contactInfo) {
         await supportStore.getContactInfo();
     }
     contactInfo.value = supportStore.contactInfo
 });
-
 </script>
 
 <template>
