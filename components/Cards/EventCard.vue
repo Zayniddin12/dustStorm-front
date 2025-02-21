@@ -1,6 +1,7 @@
 <template>
     <div class="InfoActCard cursor-pointer bg-white rounded-16 hover:shadow-xl duration-300">
-        <img class="rounded-t-16 h-[250px] sm:h-[300px] lg:h-[327px] w-full object-cover" :src="foto" alt="Foto" />
+        <img class="rounded-t-16 h-[250px] sm:h-[300px] lg:h-[327px] w-full object-cover" :src="imageSrc" alt="Foto"
+            @error="handleError" />
         <div class="p-[16px] sm:p-[20px]">
             <h2 class="text-[18px] sm:text-[20px] text-dark-100">
                 {{ title }}
@@ -13,14 +14,21 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { ref, computed } from "vue";
 import { truncateText } from "@/utils/index";
+import DefaultFoto from '@/public/images/default.jpg';
 
 const props = defineProps<{
     foto: string;
     title: string;
     paragraph: string;
 }>();
+
+const imageSrc = ref(props.foto || DefaultFoto);
+
+const handleError = () => {
+    imageSrc.value = DefaultFoto;
+};
 
 const truncatedParagraph = computed(() => truncateText(props.paragraph, 20));
 </script>

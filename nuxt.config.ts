@@ -3,6 +3,8 @@ import { defineNuxtConfig } from 'nuxt/config'
 export default defineNuxtConfig({
   ssr: true,
 
+
+
   devtools: { enabled: false },
   app: {
     // pageTransition: { name: 'fade', mode: 'out-in' },
@@ -71,6 +73,11 @@ export default defineNuxtConfig({
       ],
     },
   },
+
+  imports: {
+    autoImport: true, // Включает автоматический импорт
+  },
+
 
   modules: [
     '@nuxtjs/tailwindcss',

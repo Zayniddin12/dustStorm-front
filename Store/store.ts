@@ -52,7 +52,7 @@ export const useSupportStore = defineStore('support-store', {
                     wind_direction_id: number,
                     wind_speed: number | null,
                     wind_repeat: number
-                }[]>('/api/main/wind-speed-avg/');
+                }[]>('uz/api/main/wind-data/');
 
                 this.windSpeedAvgData = response;
                 return response;

@@ -10,4 +10,3 @@
     <LazySectionsReport />
   </div>
 </template>
-
