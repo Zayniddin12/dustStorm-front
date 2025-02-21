@@ -79,16 +79,16 @@ const tabList = ref([
 
 onMounted(async () => {
   try {
-  
-    const parameterName = 'wind_speed' 
+
+    const parameterName = 'wind_speed'
     const response = await supportStore.getWindSpeedAvg(parameterName)
-    console.log('API Response:', response) 
+    console.log('API Response:', response)
 
     if (response && response.length > 0) {
       windData.value = response.map((item) => {
-        return { 
-          x: item.wind_direction_id, 
-          y: item.wind_speed || 0 
+        return {
+          x: item.wind_direction_id,
+          y: item.wind_speed || 0
         }
       })
       console.log('Transformed wind data:', windData.value)
@@ -105,7 +105,6 @@ const series = computed(() => [
     data: windData.value.length > 0 ? windData.value : [{ x: new Date().getFullYear(), y: 0 }]
   }
 ])
-
 </script>
 
 <template>
