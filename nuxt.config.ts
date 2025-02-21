@@ -86,14 +86,6 @@ export default defineNuxtConfig({
         ],
       },
     ],
-    [
-      'yandex-metrika-module-nuxt3',
-      {
-        id: 98656039,
-        webvisor: true,
-      },
-    ],
-    'vue-yandex-maps/nuxt',
   ],
 
   // site: {
@@ -137,9 +129,9 @@ export default defineNuxtConfig({
   // },
 
   css: ['@/assets/tailwind.css'],
-
+  plugins: ['~/plugins/yandex-maps.ts'],
   build: {
-    transpile: ['vue-toastification', 'vue3-apexcharts'],
+    transpile: ['vue-toastification', 'vue3-apexcharts', 'vue-yandex-maps'],
   },
   vite: {
     optimizeDeps: {
