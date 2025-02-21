@@ -50,12 +50,10 @@ onMounted(fetchNews);
                     <span class="icon-chevron rotate-180 text-[24px]"></span>
                 </NuxtLink>
             </div>
-
             <!-- Лоадер -->
             <div v-if="isLoading" class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-[20px] mt-8">
                 <div v-for="index in 2" :key="index" class="shimmer-card_envent"></div>
             </div>
-
             <!-- Контент -->
             <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-[16px] sm:gap-[24px]">
                 <EventCard v-for="item in newsData" :key="item.id" :foto="item.image" :title="item.title"

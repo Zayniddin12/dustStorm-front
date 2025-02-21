@@ -1,6 +1,9 @@
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
+import { defineNuxtConfig } from 'nuxt/config'
 export default defineNuxtConfig({
   ssr: true,
+
+
 
   devtools: { enabled: false },
 
@@ -57,20 +60,85 @@ export default defineNuxtConfig({
     },
   },
 
+  imports: {
+    autoImport: true, // Включает автоматический импорт
+  },
+
+
   modules: [
     '@nuxtjs/tailwindcss',
     'nuxt-simple-robots',
     'nuxt-simple-sitemap',
     'nuxt-marquee',
-    '@pinia/nuxt', // Pinia to'g'ri qo‘shilgan
+    [
+      '@pinia/nuxt',
+      {
+        autoImports: [
+          'defineStore', // defineStore avtomatik import qilinadi
+          ['defineStore', 'definePiniaStore'], // defineStore 'definePiniaStore' nomi bilan import qilinadi
+        ],
+      },
+    ],
+    [
+      'yandex-metrika-module-nuxt3',
+      {
+        id: 98656039,
+        webvisor: true,
+      },
+    ],
+    'vue-yandex-maps/nuxt',
   ],
+
+  // site: {
+  //   url: 'https://unit-study.uicgroup.tech/',
+  // },
+  // routeRules: {
+  //   '/': {
+  //     sitemap: {
+  //       changefreq: 'daily',
+  //       priority: 1,
+  //       lastmod: new Date().toString('yyyy-mm-ddThh:mm:ss:zzz'),
+  //     },
+  //   },
+  //   '/ru': {
+  //     sitemap: {
+  //       changefreq: 'daily',
+  //       priority: 1,
+  //       lastmod: new Date().toString('yyyy-mm-ddThh:mm:ss:zzz'),
+  //     },
+  //   },
+  //   '/en': {
+  //     sitemap: {
+  //       changefreq: 'daily',
+  //       priority: 1,
+  //       lastmod: new Date().toString('yyyy-mm-ddThh:mm:ss:zzz'),
+  //     },
+  //   },
+  // },
+  // sitemap: {
+  //   exclude: ['/profile/**', '/profile', '/edit/**', '/edit'],
+  //   xslColumns: [
+  //     { label: 'URL', width: '50%' },
+  //     { label: 'Last Modified', select: 'sitemap:lastmod', width: '25%' },
+  //     { label: 'Priority', select: 'sitemap:priority', width: '12.5%' },
+  //     {
+  //       label: 'Change Frequency',
+  //       select: 'sitemap:changefreq',
+  //       width: '12.5%',
+  //     },
+  //   ],
+  // },
 
   css: ['@/assets/tailwind.css'],
 
   build: {
-    transpile: ['vue-toastification'],
+    transpile: ['vue-toastification', 'vue3-apexcharts'],
   },
-
+  vite: {
+    optimizeDeps: {
+      include: ['apexcharts'],
+    },
+  },
   runtimeConfig: {
     public: {
       baseURL: process.env.VITE_API_BASE_URL || 'http://localhost',

@@ -11,7 +11,8 @@ export const useSupportStore = defineStore('support-store', {
         isLoading: false as boolean,
         supportWomenLoading: false as boolean,
         error: null,
-        windData: [] as { wind_direction_id: number, wind_speed: number | null, wind_repeat: number }[]
+        windData: [] as { wind_direction_id: number, wind_speed: number | null, wind_repeat: number }[],
+        windSpeedAvgData: [] as { wind_direction_id: number, wind_speed: number | null, wind_repeat: number }[]
     }),
     actions: {
         async getContactInfo() {
@@ -32,12 +33,31 @@ export const useSupportStore = defineStore('support-store', {
             this.isLoading = true;
             try {
                 const response = await useApi().$get<{ year: string, data: { wind_direction_id: number, wind_speed: number | null, wind_repeat: number }[] }>(
-                    `/api/main/wind-average/?year=${year}`
+                    `/api/main/wind-repeat/?year=${year}`
                 );
                 this.windData = response.data;
                 return response.data;
             } catch (error) {
                 console.error(error);
+                return [];
+            } finally {
+                this.isLoading = false;
+            }
+        },
+
+        async getWindSpeedAvg() {
+            this.isLoading = true;
+            try {
+                const response = await useApi().$get<{
+                    wind_direction_id: number,
+                    wind_speed: number | null,
+                    wind_repeat: number
+                }[]>('uz/api/main/wind-data/');
+
+                this.windSpeedAvgData = response;
+                return response;
+            } catch (error) {
+                console.error('Wind Speed Average API Error:', error);
                 return [];
             } finally {
                 this.isLoading = false;
