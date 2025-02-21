@@ -8,13 +8,6 @@ import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 const supportStore = useSupportStore()
-
-const tabList = reactive([
-  {
-    label: t('for_all_time'),
-    value: 'wind',
-  },
-])
 const tabValue = ref('wind')
 
 const options = reactive({
@@ -80,22 +73,39 @@ const options = reactive({
 
 const windData = ref([])
 
+const tabList = ref([
+  { label: t('wind'), value: 'wind' },
+])
+
 onMounted(async () => {
   try {
-    const response = await supportStore.getWindSpeedAvg()
-    if (response?.series?.[0]?.data) {
-      windData.value = response.series[0].data
+  
+    const parameterName = 'wind_speed' 
+    const response = await supportStore.getWindSpeedAvg(parameterName)
+    console.log('API Response:', response) 
+
+    if (response && response.length > 0) {
+      windData.value = response.map((item) => {
+        return { 
+          x: item.wind_direction_id, 
+          y: item.wind_speed || 0 
+        }
+      })
+      console.log('Transformed wind data:', windData.value)
     }
   } catch (error) {
     console.error('Failed to fetch wind speed data:', error)
   }
 })
 
-const series = computed(() => {
-  return windData.value.length > 0
-    ? [{ name: t('for_all_time'), data: windData.value }]
-    : [{ name: t('for_all_time'), data: [0] }] // Заглушка для пустых данных
-})
+
+const series = computed(() => [
+  {
+    name: 'Shamol tezligi',
+    data: windData.value.length > 0 ? windData.value : [{ x: new Date().getFullYear(), y: 0 }]
+  }
+])
+
 </script>
 
 <template>
@@ -111,13 +121,8 @@ const series = computed(() => {
               {{ $t('graphic_attendance') }}
             </p>
           </div>
-          <Tab
-            :list="tabList"
-            :model-value="tabValue"
-            @update:model-value="tabValue = $event"
-            class="space-x-3 border-none"
-            item-class="!pt-0 whitespace-nowrap"
-          />
+          <Tab :list="tabList" :model-value="tabValue" @update:model-value="tabValue = $event"
+            class="space-x-3 border-none" item-class="!pt-0 whitespace-nowrap" />
         </div>
         <div v-if="series[0]?.data?.length">
           <client-only>
@@ -126,11 +131,7 @@ const series = computed(() => {
         </div>
 
         <div v-if="!series[0].data.length">
-          <NoData
-            :title="$t('empty_data')"
-            class="mt-8"
-            image="/svg/empty-state.svg"
-          />
+          <NoData :title="$t('empty_data')" class="mt-8" image="/svg/empty-state.svg" />
         </div>
       </CCard>
     </div>

@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
-import type { IDefaultResponse, IResident } from '@/types'
-import type { IStatistics, ISupportCard, IContactInfo } from '@/types/support'
+import { useApi } from '@/composables/useApi';
+import type { IDefaultResponse, IResident } from '@/types';
+import type { IStatistics, ISupportCard, IContactInfo } from '@/types/support';
 
 export const useSupportStore = defineStore('support-store', {
     state: () => ({
@@ -12,7 +13,8 @@ export const useSupportStore = defineStore('support-store', {
         supportWomenLoading: false as boolean,
         error: null,
         windData: [] as { wind_direction_id: number, wind_speed: number | null, wind_repeat: number }[],
-        windSpeedAvgData: [] as { wind_direction_id: number, wind_speed: number | null, wind_repeat: number }[]
+        windSpeedAvgData: [] as { wind_direction_id: number, wind_speed: number | null, wind_repeat: number }[],
+        windInfoData: [] as { name: string, parameter_name: string, unit: string }[]
     }),
     actions: {
         async getContactInfo() {
@@ -45,19 +47,34 @@ export const useSupportStore = defineStore('support-store', {
             }
         },
 
-        async getWindSpeedAvg() {
+        async getWindSpeedAvg(parameterName: string) {
             this.isLoading = true;
             try {
                 const response = await useApi().$get<{
                     wind_direction_id: number,
                     wind_speed: number | null,
                     wind_repeat: number
-                }[]>('/api/main/wind-speed-avg/');
+                }[]>(`/api/main/wind-data/?parameter_name=${parameterName}`);
 
                 this.windSpeedAvgData = response;
                 return response;
             } catch (error) {
                 console.error('Wind Speed Average API Error:', error);
+                return [];
+            } finally {
+                this.isLoading = false;
+            }
+        },
+
+
+        async getWindInfo() {
+            this.isLoading = true;
+            try {
+                const response = await useApi().$get<{ name: string, parameter_name: string, unit: string }[]>('/api/main/wind-info/');
+                this.windInfoData = response;
+                return response;
+            } catch (error) {
+                console.error('Wind Info API Error:', error);
                 return [];
             } finally {
                 this.isLoading = false;
