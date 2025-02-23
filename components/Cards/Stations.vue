@@ -19,9 +19,9 @@
           class="my-highlight leading-20 text-dark line-clamp-2"
           :searchWords="[keywords]"
           :autoEscape="true"
-          :textToHighlight="item?.title"
+          :textToHighlight="item?.name"
         />
-        <h4 class="">{{ item?.title }}</h4>
+        <h4 class="">{{ item?.name }}</h4>
       </CommonBlockPreloader>
     </div>
     <div class="flex-center-between">
@@ -44,7 +44,7 @@
           class="flex items-center mt-4 sm:mt-0 text-dark leading-16 text-sm font-medium"
         >
           <i class="icon-location text-blue transition duration-300" />
-          <span class="ml-1.5">{{ item?.address }}</span>
+          <span class="ml-1.5">{{ item?.name }}</span>
         </p>
       </CommonPreloader>
 

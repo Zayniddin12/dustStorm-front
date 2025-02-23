@@ -3,8 +3,6 @@ import { defineNuxtConfig } from 'nuxt/config'
 export default defineNuxtConfig({
   ssr: true,
 
-
-
   devtools: { enabled: false },
   app: {
     // pageTransition: { name: 'fade', mode: 'out-in' },
@@ -78,7 +76,6 @@ export default defineNuxtConfig({
     autoImport: true, // Включает автоматический импорт
   },
 
-
   modules: [
     '@nuxtjs/tailwindcss',
     'nuxt-simple-robots',
@@ -93,6 +90,7 @@ export default defineNuxtConfig({
         ],
       },
     ],
+    'vue-yandex-maps/nuxt',
   ],
 
   // site: {
@@ -136,7 +134,6 @@ export default defineNuxtConfig({
   // },
 
   css: ['@/assets/tailwind.css'],
-  plugins: ['~/plugins/yandex-maps.ts'],
   build: {
     transpile: ['vue-toastification', 'vue3-apexcharts', 'vue-yandex-maps'],
   },

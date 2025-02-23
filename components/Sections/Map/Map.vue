@@ -9,20 +9,24 @@
       v-if="totalData"
       class="relative flex max-md:flex-col md:items-center md:h-[580px] max-md:hidden"
     >
+      <!-- Overlay (Form va Map o'rtasida joylashgan) -->
       <div
         :class="isBlock ? 'block' : 'hidden'"
         @keyup="toggleHidden"
         @keydown="toogleBlock"
         @dblclick="removeHidden"
         tabindex="0"
-        class="absolute w-full h-full z-1"
+        class="absolute w-screen h-full z-10"
       ></div>
 
-      <div class="container">
+      <!-- Chap tarafdagi forma -->
+      <div class="container relative z-20 w-[480px]">
         <div
-          class="md:!w-[470px] h-full z-[1] flex items-end justify-between shadow-map-list"
+          class="md:w-[470px] h-full flex items-end justify-between shadow-map-list"
         >
-          <div class="flex flex-col md:w-[480px] w-full relative z-1 h-[580px]">
+          <div
+            class="flex flex-col md:w-[480px] w-full relative z-20 h-[580px]"
+          >
             <div class="md:w-[480px] w-full bg-white p-4 flex items-center">
               <FormInput
                 v-model="searchPeople"
@@ -82,13 +86,14 @@
                 ></div>
               </div>
               <div v-else class="bg-[#F4F7FA] p-4 h-[504px] overflow-y-scroll">
-                cew
                 <CommonArticleNoData />
               </div>
             </template>
           </div>
         </div>
       </div>
+
+      <!-- Yandex Map (butun ekran bo'ylab) -->
       <client-only>
         <yandex-map
           v-model="activeCoord"
@@ -96,20 +101,29 @@
           :settings="settings"
           :zoom="16"
           :controls="[]"
-          class="w-full h-full absolute inset-0"
+          class="absolute inset-0 w-screen h-full z-0"
         >
-          <ymap-marker
+          <yandex-map-default-scheme-layer />
+          <yandex-map-default-features-layer />
+          <yandex-map-marker
             v-for="(card, i) in markers"
             :key="i"
-            :coords="card"
+            :settings="{ coordinates: [card?.latitude, card?.longitude] }"
             marker-id="123"
-            :hint-content="card?.name"
+            position="top-center left-center"
+            class="!size-20"
             :icon="markerIcon"
             cluster-name="1"
-          />
+          >
+            <img
+              alt="Marker"
+              class="cursor-pointer w-[45px] h-[60px]"
+              src="/public/images/svg/map-pin-filled.svg"
+          /></yandex-map-marker>
         </yandex-map>
       </client-only>
     </div>
+
     <div class="relative flex flex-col md:hidden">
       <div class="!py-3 container">
         <TabGroup class=" " v-model="activeTab" :list="tabs" />
@@ -195,16 +209,17 @@
             <client-only :key="activeTab">
               <yandex-map
                 v-model="activeCoord"
-                :coords="coords"
                 :settings="settings"
                 :zoom="16"
                 :controls="[]"
                 class="w-full h-full absolute inset-0"
               >
-                <ymap-marker
+                <yandex-map-default-scheme-layer />
+                <yandex-map-default-features-layer />
+                <yandex-map-marker
                   v-for="(card, i) in markers"
                   :key="i"
-                  :coords="card"
+                  :settings="{ coordinates: [card?.longitude, card?.latitude] }"
                   marker-id="123"
                   :hint-content="card?.name"
                   :icon="markerIcon"
@@ -221,12 +236,21 @@
 
 <script setup lang="ts">
 import { useRouter } from '#app'
+import type { LngLat } from '@yandex/ymaps3-types'
+
 import { useI18n } from 'vue-i18n'
+import {
+  YandexMap,
+  YandexMapDefaultFeaturesLayer,
+  YandexMapDefaultSchemeLayer,
+  YandexMapFeature,
+  YandexMapMarker,
+} from 'vue-yandex-maps'
 import { useDebounce, useIntersectionObserver } from '@vueuse/core'
 import type { ICommonDataResponse } from '~/types/common'
 const router = useRouter()
 const isLoading = ref(true)
-
+const coords = ref<{ lat?: number; lng?: number; location?: number }>({})
 const { t, locale } = useI18n()
 const isBlock = ref(true)
 
@@ -245,13 +269,14 @@ function removeHidden(a: any) {
 const settings = {
   apiKey: '',
   lang: 'ru_RU',
+  location: { center: [43.432453, 68.432432], zoom: 10 },
   coordorder: 'latlong',
   version: '2.1',
 }
 const behaviors = ref('drag')
 const markerIcon = {
   layout: 'default#imageWithContent',
-  imageHref: '/images/blue-map-marker.svg',
+  imageHref: '/public/images/svg/close.svg',
   imageSize: [75, 75],
   imageOffset: [0, 0],
   content: '',
@@ -275,9 +300,13 @@ const markerOptions = computed(() => {
 
   return { position: { lat, lng }, icon: '/images/home-map-marker.svg' }
 })
-const coords = ref([12.3456, 15.6544])
-// const coords = ref<{ lat?: number; lng?: number; location?: number }>({});
-const activeCoord = ref<{ lat?: number; lng?: number; location?: number }>({})
+// const coords = ref([12.3456, 15.6544])
+
+const activeCoord = ref<{ lat?: number; lng?: number; location?: number }>({
+  id: 1,
+  name: 'Nukus',
+  coordinates: [43.8333, 57.51],
+})
 const activeTab = ref('map')
 const tabs = reactive([
   {
@@ -330,9 +359,9 @@ onMounted(async () => {
       people.value = res?.results
       res?.results?.forEach((el: any) => {
         markers.value.push(el)
-        coords.value = [el?.latitude, el?.longitude]
+        coords.value = { lat: el?.latitude, lng: el?.longitude }
       })
-      activeCoord.value.location = people.value?.at(0)?.location
+      console.log(markers.value)
     })
     .finally(() => {
       setTimeout(() => {
@@ -383,7 +412,7 @@ watch(searchPeople, (newQuery) => {
     isLoading.value = true
     offset.value = 0
     useApi()
-      .$get(`v1/catalog/OrganizationCenters/`, {
+      .$get('v1/catalog/OrganizationCenters/', {
         params: {
           limit: limit.value,
           offset: offset.value,
@@ -407,6 +436,7 @@ function zoomMap(item: any, mobile?: boolean) {
   coords.value = item?.location?.split(';')
   // coords.value.lat = Number(item?.location?.split(";")[0]);
   // coords.value.lng = Number(item?.location?.split(";")[1]);
+
   activeCoord.value = coords.value
   if (mobile) {
     activeTab.value = 'map'

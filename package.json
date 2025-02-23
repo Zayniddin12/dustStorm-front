@@ -45,6 +45,6 @@
     "vue-highlight-words": "^3.0.1",
     "vue-yandex-maps": "^2.1.4",
     "vue3-apexcharts": "^1.8.0",
-    "yandex-metrika-module-nuxt3": "^1.5.3"
+    "yandex-metrika-module-nuxt3": "1.5.3"
   }
 }
