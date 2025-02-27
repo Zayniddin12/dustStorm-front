@@ -24,7 +24,7 @@
             <UILang custom-class="!hidden lg:!block" />
           </div>
 
-          <UIButton :text="$t('contact_us_btn')" class="hidden lg:block !text-sm" @click="navigateTo('/contact')" />
+          <!-- <UIButton :text="$t('contact_us_btn')" class="hidden lg:block !text-sm" @click="navigateTo('/contact')" /> -->
         </div>
       </div>
     </nav>
@@ -72,27 +72,22 @@ const navigateTo = (path: string) => {
 };
 
 const headerMenuRu = [
-  { id: 1, title: 'Программы', slug: '/programs' },
-  { id: 2, title: 'Гранты', slug: '/grants' },
-  { id: 3, title: 'Услуги', slug: '/services' },
+
+  { id: 4, title: 'Глава', slug: '/' },
   { id: 4, title: 'Новости', slug: '/news' },
-  { id: 5, title: 'Контакты', slug: '/contact' },
+  { id: 5, title: 'Отчеты', slug: '/report' },
 ];
 
 const headerMenuEn = [
-  { id: 1, title: 'Programs', slug: '/programs' },
-  { id: 2, title: 'Grants', slug: '/grants' },
-  { id: 3, title: 'Services', slug: '/services' },
+  { id: 4, title: 'Home', slug: '/' },
   { id: 4, title: 'News', slug: '/news' },
-  { id: 5, title: 'Contact', slug: '/contact' },
+  { id: 5, title: 'Reports', slug: '/report' },
 ];
 
 const headerMenuUz = [
-  { id: 1, title: 'Dasturlar', slug: '/programs' },
-  { id: 2, title: 'Grantlar', slug: '/grants' },
-  { id: 3, title: 'Xizmatlar', slug: '/services' },
+  { id: 4, title: 'Bo`sh sahifa', slug: '/' },
   { id: 4, title: 'Yangiliklar', slug: '/news' },
-  { id: 5, title: 'Kontaktlar', slug: '/contact' },
+  { id: 5, title: 'Hisobotlar', slug: '/report' },
 ];
 
 const headerMenu = computed(() => {

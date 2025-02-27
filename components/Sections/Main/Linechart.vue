@@ -79,19 +79,16 @@ const tabList = ref([
 
 onMounted(async () => {
   try {
-
     const parameterName = 'wind_speed'
     const response = await supportStore.getWindSpeedAvg(parameterName)
-    console.log('API Response:', response)
-
-    if (response && response.length > 0) {
-      windData.value = response.map((item) => {
-        return {
-          x: item.wind_direction_id,
-          y: item.wind_speed || 0
-        }
-      })
+    if (response?.series?.length > 0 && response.series[0]?.data?.length > 0) {
+      windData.value = response.series[0].data.map((item) => ({
+        x: item.x,
+        y: item.y
+      }))
       console.log('Transformed wind data:', windData.value)
+    } else {
+      console.warn('No data available')
     }
   } catch (error) {
     console.error('Failed to fetch wind speed data:', error)
@@ -101,10 +98,11 @@ onMounted(async () => {
 
 const series = computed(() => [
   {
-    name: 'Shamol tezligi',
+    name: 'Shamol namligi',
     data: windData.value.length > 0 ? windData.value : [{ x: new Date().getFullYear(), y: 0 }]
   }
 ])
+
 </script>
 
 <template>
