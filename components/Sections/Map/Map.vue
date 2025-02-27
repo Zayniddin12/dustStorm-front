@@ -1,10 +1,5 @@
 <template>
   <div>
-    <h2
-      class="container text-dark font-bold text-xl sm:text-2xl md:text-[32px] leading-130 mb-3 md:mb-6"
-    >
-      {{ title ? title : $t('location_our_boxes') }}
-    </h2>
     <div
       v-if="totalData"
       class="relative flex max-md:flex-col md:items-center md:h-[580px] max-md:hidden"
@@ -74,8 +69,9 @@
                   :loading="isLoading"
                   :keywords="searchPeople"
                   :active="
-                    activeCoord?.location
-                      ? item?.location === activeCoord?.location
+                    activeCoord?.lat
+                      ? item?.lat === activeCoord?.lat &&
+                        item?.lng === activeCoord?.lng
                       : false
                   "
                 />
@@ -112,8 +108,6 @@
             marker-id="123"
             position="top-center left-center"
             class="!size-20"
-            :icon="markerIcon"
-            cluster-name="1"
           >
             <img
               alt="Marker"
@@ -250,7 +244,10 @@ import { useDebounce, useIntersectionObserver } from '@vueuse/core'
 import type { ICommonDataResponse } from '~/types/common'
 const router = useRouter()
 const isLoading = ref(true)
-const coords = ref<{ lat?: number; lng?: number; location?: number }>({})
+const coords = ref<{ lat?: number; lng?: number; name?: string }>({
+  lat: 0,
+  lng: 0,
+})
 const { t, locale } = useI18n()
 const isBlock = ref(true)
 
@@ -266,13 +263,19 @@ function toogleBlock(a: any) {
 function removeHidden(a: any) {
   isBlock.value = false
 }
-const settings = {
+const settings = computed(() => ({
   apiKey: '',
   lang: 'ru_RU',
-  location: { center: [43.432453, 68.432432], zoom: 10 },
+  location: {
+    center: [
+      activeCoord.value?.lat ? activeCoord.value?.lat : coords.value?.lat,
+      activeCoord.value?.lng ? activeCoord.value?.lng : coords.value?.lng,
+    ],
+    zoom: 10,
+  }, // Default center (Tashkent)
   coordorder: 'latlong',
   version: '2.1',
-}
+}))
 const behaviors = ref('drag')
 const markerIcon = {
   layout: 'default#imageWithContent',
@@ -302,10 +305,10 @@ const markerOptions = computed(() => {
 })
 // const coords = ref([12.3456, 15.6544])
 
-const activeCoord = ref<{ lat?: number; lng?: number; location?: number }>({
-  id: 1,
-  name: 'Nukus',
-  coordinates: [43.8333, 57.51],
+const activeCoord = ref<{ lat?: number; lng?: number; name?: number }>({
+  name: 1,
+  lat: 43.8333,
+  lng: 57.51,
 })
 const activeTab = ref('map')
 const tabs = reactive([
@@ -340,12 +343,7 @@ withDefaults(defineProps<Props>(), {})
 function handleCtrl(event) {
   console.log(event)
 }
-
-// FETCH
-
-onMounted(async () => {
-  document.addEventListener('keydown', toogleBlock)
-  document.addEventListener('keyup', toggleHidden)
+async function fetchData() {
   await useApi()
     .$get<ICommonDataResponse<any>>(`${locale.value}/api/main/station/`, {
       params: {
@@ -357,87 +355,110 @@ onMounted(async () => {
       totalData.value = res?.count
       total.value = res?.count
       people.value = res?.results
-      res?.results?.forEach((el: any) => {
-        markers.value.push(el)
-        coords.value = { lat: el?.latitude, lng: el?.longitude }
-      })
-      console.log(markers.value)
+      if (res?.results?.length > 0) {
+        const firstLocation = res.results?.[0]
+        coords.value = {
+          lat: Number(firstLocation.latitude),
+          lng: Number(firstLocation.longitude),
+          name: firstLocation.name,
+        }
+        activeCoord.value = coords.value
+        console.log('activfeCoord:', activeCoord.value)
+      }
+      markers.value = res?.results || []
     })
     .finally(() => {
       setTimeout(() => {
         isLoading.value = false
       }, 400)
     })
+}
+fetchData()
+
+// FETCH
+onMounted(async () => {
+  document.addEventListener('keydown', toogleBlock)
+  document.addEventListener('keyup', toggleHidden)
 })
 
-// FETCH MORE
-
-const { stop } = useIntersectionObserver(target, ([{ isIntersecting }]) => {
-  targetIsVisible.value = isIntersecting
-})
-
-watch(
-  () => targetIsVisible.value,
-  () => {
-    if (targetIsVisible.value) {
-      getMorePeople()
+// Infinite scroll
+const { stop } = useIntersectionObserver(
+  target,
+  ([{ isIntersecting }], observerElement) => {
+    if (isIntersecting) {
+      loadMore()
     }
   }
 )
 
-function getMorePeople() {
-  offset.value += limit.value
-  useApi()
-    .$get(`v1/catalog/OrganizationCenters/?search=${searchPeople.value}`, {
+async function loadMore() {
+  if (isLoading.value || people.value.length >= total.value) return
+
+  try {
+    isLoading.value = true
+    offset.value += limit.value
+
+    const res = await useApi().$get(`${locale.value}/api/main/station/`, {
       params: {
         limit: limit.value,
         offset: offset.value,
+        search: searchPeople.value,
       },
     })
-    .then((res) => {
-      setTimeout(() => {
-        res?.results?.forEach((el: any) => {
-          people.value.push(el)
-        })
-      }, 400)
-    })
+
+    people.value = [...people.value, ...res.results]
+    markers.value = [...markers.value, ...res.results]
+  } catch (error) {
+    console.error('Load more error:', error)
+  } finally {
+    isLoading.value = false
+  }
 }
 
 // SEARCH
+const debouncedSearch = useDebounce(searchPeople, 300)
 
-useDebounce(searchPeople, 10)
-
-watch(searchPeople, (newQuery) => {
-  debounce('search', () => {
+watch(debouncedSearch, async (newQuery) => {
+  try {
     isLoading.value = true
     offset.value = 0
-    useApi()
-      .$get('v1/catalog/OrganizationCenters/', {
-        params: {
-          limit: limit.value,
-          offset: offset.value,
-          search: newQuery,
-        },
-      })
-      .then((res) => {
-        total.value = res?.count
-        people.value = res?.results
-      })
-      .finally(() => {
-        setTimeout(() => {
-          isLoading.value = false
-        }, 300)
-      })
-  })
+    const res = await useApi().$get(`${locale.value}/api/main/station/`, {
+      params: {
+        limit: limit.value,
+        offset: offset.value,
+        search: newQuery,
+      },
+    })
+    total.value = res?.count
+    people.value = res?.results || []
+    markers.value = res?.results || []
+
+    // Zoom to first search result if exists
+    if (res?.results?.length > 0) {
+      const firstResult = res.results[0]
+      zoomMap(firstResult)
+    }
+  } catch (error) {
+    console.error('Search error:', error)
+  } finally {
+    isLoading.value = false
+  }
 })
 
 // GET COORDS
 function zoomMap(item: any, mobile?: boolean) {
-  coords.value = item?.location?.split(';')
-  // coords.value.lat = Number(item?.location?.split(";")[0]);
-  // coords.value.lng = Number(item?.location?.split(";")[1]);
+  if (!item?.latitude || !item?.longitude) return
 
-  activeCoord.value = coords.value
+  const lat = Number(item.latitude)
+  const lng = Number(item.longitude)
+
+  coords.value = { lat, lng }
+  activeCoord.value = {
+    lat,
+    lng,
+    name: item.name,
+  }
+
   if (mobile) {
     activeTab.value = 'map'
   }

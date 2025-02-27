@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-white rounded-xl py-4 px-5 mt-3 first:mt-0 border duration-300 h-[120px] flex flex-col justify-between"
+    class="bg-white rounded-xl py-4 px-5 mt-3 first:mt-0 border duration-300 flex flex-col justify-between"
     :class="
       active
         ? 'shadow-map-hover border-blue'
@@ -15,13 +15,6 @@
         margin="0"
         width="144px"
       >
-        <Highlighter
-          class="my-highlight leading-20 text-dark line-clamp-2"
-          :searchWords="[keywords]"
-          :autoEscape="true"
-          :textToHighlight="item?.name"
-        />
-        <h4 class="">{{ item?.name }}</h4>
       </CommonBlockPreloader>
     </div>
     <div class="flex-center-between">
@@ -33,18 +26,15 @@
         margin="12px 0 0 32px"
       >
         <p
-          v-if="item?.subway"
-          class="flex items-center mt-4 sm:mt-0 text-dark leading-16 text-sm font-medium"
-        >
-          <i class="icon-metro text-blue transition duration-300" />
-          <span class="ml-1.5">{{ item?.subway }}</span>
-        </p>
-        <p
-          v-else
           class="flex items-center mt-4 sm:mt-0 text-dark leading-16 text-sm font-medium"
         >
           <i class="icon-location text-blue transition duration-300" />
-          <span class="ml-1.5">{{ item?.name }}</span>
+          <Highlighter
+            class="my-highlight leading-20 text-dark line-clamp-2 ml-1.5"
+            :searchWords="[keywords]"
+            :autoEscape="true"
+            :textToHighlight="item?.name"
+          />
         </p>
       </CommonPreloader>
 
