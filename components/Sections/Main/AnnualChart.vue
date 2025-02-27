@@ -1,111 +1,111 @@
 <script setup>
-import { ref, onMounted, watch, computed } from 'vue';
-import { Chart } from 'chart.js/auto';
-import { useI18n } from 'vue-i18n';
-import { onClickOutside } from '@vueuse/core';
-import { useSupportStore } from '@/Store/store';
+import { ref, onMounted, watch, computed } from 'vue'
+import { Chart } from 'chart.js/auto'
+import { useI18n } from 'vue-i18n'
+import { useSupportStore } from '@/Store/store'
 
-let chartInstance = ref(null);
-const { t, locale } = useI18n();
-const supportStore = useSupportStore();
-const years = Array.from({ length: 10 }, (_, i) => new Date().getFullYear() - i);
-const selectedYear = ref(null);
-const isOpen = ref(false);
-
-const toggleDropdown = () => {
-    isOpen.value = !isOpen.value;
-};
-
-
-const selectYear = (year) => {
-    selectedYear.value = year;
-    isOpen.value = false;
-
-
-
-    
-
-};
-
-const dropdownRef = ref(null);
-
-onClickOutside(dropdownRef, () => {
-  isOpen.value = false;
-});
-
+const years = Array.from({ length: 10 }, (_, i) => new Date().getFullYear() - i)
+const selectedYear = ref(null)
+let chartInstance = ref(null)
+const { t, locale } = useI18n()
+const supportStore = useSupportStore()
 
 const labelsMap = {
-    ru: ['Север', 'Северо-восток', 'Восток', 'Юго-восток', 'Юг', 'Юго-запад', 'Запад', 'Северо-запад'],
-    uz: ['Shimol', 'Shimoli-sharq', 'Sharq', 'Janubi-sharq', 'Janub', 'Janubi-gʻarb', 'Gʻarb', 'Shimoli-gʻarb'],
-    en: ['North', 'Northeast', 'East', 'Southeast', 'South', 'Southwest', 'West', 'Northwest']
-};
+  ru: [
+    'Север',
+    'Северо-восток',
+    'Восток',
+    'Юго-восток',
+    'Юг',
+    'Юго-запад',
+    'Запад',
+    'Северо-запад',
+  ],
+  uz: [
+    'Shimol',
+    'Shimoli-sharq',
+    'Sharq',
+    'Janubi-sharq',
+    'Janub',
+    'Janubi-gʻarb',
+    'Gʻarb',
+    'Shimoli-gʻarb',
+  ],
+  en: [
+    'North',
+    'Northeast',
+    'East',
+    'Southeast',
+    'South',
+    'Southwest',
+    'West',
+    'Northwest',
+  ],
+}
 
 const generateRadarData = () => {
-    const labels = labelsMap[locale.value] || labelsMap.en;
-    const data = supportStore.windData.map(item => item.wind_speed ?? 0);
+  const labels = labelsMap[locale.value] || labelsMap.en
+  const data = supportStore.windData.map((item) => item.wind_speed ?? 0)
 
-    return {
-        labels,
-        datasets: [{
-            data,
-            backgroundColor: '#38B847A1',
-            borderColor: '#33B34A',
-            pointBackgroundColor: '#33B34A',
-            pointBorderColor: '#fff',
-        }]
-    };
-};
+  return {
+    labels,
+    datasets: [
+      {
+        data,
+        backgroundColor: '#38B847A1',
+        borderColor: '#33B34A',
+        pointBackgroundColor: '#33B34A',
+        pointBorderColor: '#fff',
+      },
+    ],
+  }
+}
 
 const initChart = () => {
-    const ctx = document.getElementById('windRadarChart');
+  const ctx = document.getElementById('windRadarChart')
 
-    if (chartInstance.value) {
-        chartInstance.value.destroy();
-    }
+  if (chartInstance.value) {
+    chartInstance.value.destroy()
+  }
 
-    chartInstance.value = new Chart(ctx, {
-        type: 'radar',
-        data: generateRadarData(),
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                r: {
-                    beginAtZero: true,
-                    min: 0,
-                    max: 8,
-                    grid: { color: 'rgba(0, 0, 0, 0.1)' },
-                    pointLabels: { color: '#374151', font: { size: 14 } },
-                    ticks: {
-                        stepSize: 1,
-                        callback: (value) => value
-                    }
-                }
-            },
-            plugins: {
-                legend: { display: false },
-                tooltip: { enabled: true, backgroundColor: '#1F2937' }
-            }
-        }
-    });
-};
+  chartInstance.value = new Chart(ctx, {
+    type: 'radar',
+    data: generateRadarData(),
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        r: {
+          beginAtZero: true,
+          min: 0,
+          max: 8,
+          grid: { color: 'rgba(0, 0, 0, 0.1)' },
+          pointLabels: { color: '#374151', font: { size: 14 } },
+          ticks: {
+            stepSize: 1,
+            callback: (value) => value,
+          },
+        },
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: { enabled: true, backgroundColor: '#1F2937' },
+      },
+    },
+  })
+}
 
 watch([selectedYear, locale], async ([newYear]) => {
-    if (newYear) {
-        await supportStore.getWindAverage(newYear);
-        initChart();
-    }
-});
-
-
-
-
+  if (newYear) {
+    await supportStore.getWindAverage(newYear)
+    initChart()
+  }
+})
 
 onMounted(() => {
-    selectedYear.value = years[0];
-});
+  selectedYear.value = years[0]
+})
 </script>
-
 
 <template>
     <section class="bg-gray-200 py-[30px]">
@@ -141,8 +141,11 @@ onMounted(() => {
                     </div>
                 </div>
             </div>
+           </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 </template>
 <style lang="css" scoped>
 .custom-select {

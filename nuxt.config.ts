@@ -3,8 +3,6 @@ import { defineNuxtConfig } from 'nuxt/config'
 export default defineNuxtConfig({
   ssr: true,
 
-
-
   devtools: { enabled: false },
 
   app: {
@@ -64,7 +62,6 @@ export default defineNuxtConfig({
     autoImport: true, // Включает автоматический импорт
   },
 
-
   modules: [
     '@nuxtjs/tailwindcss',
     'nuxt-simple-robots',
@@ -77,13 +74,6 @@ export default defineNuxtConfig({
           'defineStore', // defineStore avtomatik import qilinadi
           ['defineStore', 'definePiniaStore'], // defineStore 'definePiniaStore' nomi bilan import qilinadi
         ],
-      },
-    ],
-    [
-      'yandex-metrika-module-nuxt3',
-      {
-        id: 98656039,
-        webvisor: true,
       },
     ],
     'vue-yandex-maps/nuxt',
@@ -130,9 +120,8 @@ export default defineNuxtConfig({
   // },
 
   css: ['@/assets/tailwind.css'],
-
   build: {
-    transpile: ['vue-toastification', 'vue3-apexcharts'],
+    transpile: ['vue-toastification', 'vue3-apexcharts', 'vue-yandex-maps'],
   },
   vite: {
     optimizeDeps: {
