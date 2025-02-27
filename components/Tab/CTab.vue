@@ -53,7 +53,7 @@ const pick = (tab: string | number, e?: { target: HTMLButtonElement }) => {
     }
     localeValue.value = tab;
     emit("update:modelValue", tab);
-    store.getWindSpeedAvg(tab); 
+    store.getWindSpeedAvg(tab);
 };
 
 onMounted(async () => {

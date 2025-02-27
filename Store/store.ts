@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { useApi } from '@/composables/useApi';
 import type { IDefaultResponse, IResident } from '@/types';
 import type { IStatistics, ISupportCard, IContactInfo } from '@/types/support';
