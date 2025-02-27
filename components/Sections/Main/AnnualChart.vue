@@ -16,9 +16,15 @@ const toggleDropdown = () => {
     isOpen.value = !isOpen.value;
 };
 
+
 const selectYear = (year) => {
     selectedYear.value = year;
     isOpen.value = false;
+
+
+
+    
+
 };
 
 const dropdownRef = ref(null);
