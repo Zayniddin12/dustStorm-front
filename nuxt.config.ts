@@ -6,8 +6,8 @@ export default defineNuxtConfig({
 
 
   devtools: { enabled: false },
+
   app: {
-    // pageTransition: { name: 'fade', mode: 'out-in' },
     head: {
       htmlAttrs: {
         lang: 'en',
@@ -24,11 +24,6 @@ export default defineNuxtConfig({
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'format-detection', content: 'telephone=no' },
-        // {
-        //   hid: 'og:image',
-        //   property: 'og:image',
-        //   content: 'https://unit-study-front.uicgroup.tech/description.png',
-        // },
         {
           hid: 'og:title',
           property: 'og:title',
@@ -40,11 +35,6 @@ export default defineNuxtConfig({
           content:
             'Unity Study provides quality education consulting and guarantees study opportunities abroad, offering expert guidance for a successful international educational experience.',
         },
-        // {
-        //   hid: 'twitter:image',
-        //   property: 'twitter:image',
-        //   content: 'https://unit-study-front.uicgroup.tech/description.png',
-        // },
         {
           hid: 'twitter:image:alt',
           property: 'twitter:image:alt',
@@ -61,10 +51,6 @@ export default defineNuxtConfig({
           content:
             'Unity Study provides quality education consulting and guarantees study opportunities abroad, offering expert guidance for a successful international educational experience.',
         },
-        // {
-        //   property: 'og:image',
-        //   content: 'https://unit-study-front.uicgroup.tech/description.png',
-        // },
         {
           name: 'description',
           content:
@@ -155,7 +141,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      baseURL: process.env.VITE_API_BASE_URL || 'localhost',
+      baseURL: process.env.VITE_API_BASE_URL || 'http://localhost',
     },
   },
 
@@ -172,5 +158,6 @@ export default defineNuxtConfig({
   yandexMaps: {
     apikey: '9191d860-42c5-4e70-98aa-8c92721bbdc3',
   },
+
   compatibilityDate: '2024-08-27',
 })

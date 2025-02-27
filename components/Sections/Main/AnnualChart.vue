@@ -138,7 +138,12 @@ onMounted(() => {
                                 </li>
                             </ul>
                         </div>
-
+                        <select v-model="selectedYear"
+                            class="w-full lg:w-[333px] mt-[12px] py-[12px] px-[16px] border border-gray-400 bg-white text-black focus:outline-none focus:ring-2 focus:ring-primary">
+                            <option v-for="year in years" :key="year" :value="year">
+                                {{ year }}
+                            </option>
+                        </select>
                     </div>
                 </div>
             </div>
