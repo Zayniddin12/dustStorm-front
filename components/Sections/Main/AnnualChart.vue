@@ -1,14 +1,15 @@
 <script setup>
-import { ref, onMounted, watch, computed } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { Chart } from 'chart.js/auto'
 import { useI18n } from 'vue-i18n'
 import { useSupportStore } from '@/Store/store'
 
 const years = Array.from({ length: 10 }, (_, i) => new Date().getFullYear() - i)
 const selectedYear = ref(null)
-let chartInstance = ref(null)
+const chartInstance = ref(null)
 const { t, locale } = useI18n()
 const supportStore = useSupportStore()
+const isOpen = ref(false)
 
 const labelsMap = {
   ru: [
@@ -63,11 +64,7 @@ const generateRadarData = () => {
 
 const initChart = () => {
   const ctx = document.getElementById('windRadarChart')
-
-  if (chartInstance.value) {
-    chartInstance.value.destroy()
-  }
-
+  if (chartInstance.value) chartInstance.value.destroy()
   chartInstance.value = new Chart(ctx, {
     type: 'radar',
     data: generateRadarData(),
@@ -83,7 +80,6 @@ const initChart = () => {
           pointLabels: { color: '#374151', font: { size: 14 } },
           ticks: {
             stepSize: 1,
-            callback: (value) => value,
           },
         },
       },
@@ -93,6 +89,15 @@ const initChart = () => {
       },
     },
   })
+}
+
+const toggleDropdown = () => {
+  isOpen.value = !isOpen.value
+}
+
+const selectYear = (year) => {
+  selectedYear.value = year
+  isOpen.value = false
 }
 
 watch([selectedYear, locale], async ([newYear]) => {
@@ -108,106 +113,100 @@ onMounted(() => {
 </script>
 
 <template>
-    <section class="bg-gray-200 py-[30px]">
-        <div class="mx-auto max-w-[1200px] px-[15px] mt-[50px]">
-            <div class="flex flex-col lg:flex-row justify-between mb-[24px]">
-                <div class="w-full lg:w-[583px] h-[350px] lg:h-[573px] bg-white rounded-2xl p-4">
-                    <canvas id="windRadarChart"></canvas>
-                </div>
-
-                <div class="w-full lg:w-auto mt-6 lg:mt-0">
-                    <h1 class="text-24 lg:text-32 font-bold mb-[14px] text-left">
-                        {{ t("Chart__title") }}
-                    </h1>
-                    <p class="text-14 lg:text-16 w-full lg:w-[556px] mt-4 text-dark-300">
-                        {{ t("Chart__text") }}
-                    </p>
-
-                    <div class="mt-[22px]">
-                        <h2 class="font-bold text-14 text-left">
-                            {{ t("Chart__select") }}
-                        </h2>
-                        <div class="relative w-full max-w-[333px]" ref="dropdownRef">
-                            <div @click="toggleDropdown" class="custom-select">
-                                {{ selectedYear || "Выберите год" }}
-                                <span class="arrow" :class="{ open: isOpen }">&#9662;</span>
-                            </div>
-                            <ul v-if="isOpen" class="custom-dropdown">
-                                <li v-for="year in years" :key="year" @click="selectYear(year)">
-                                    {{ year }}
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+  <section class="bg-gray-200 py-[30px]">
+    <div class="mx-auto max-w-[1200px] px-[15px] mt-[50px]">
+      <div class="flex flex-col lg:flex-row justify-between mb-[24px]">
+        <div
+          class="w-full lg:w-[583px] h-[350px] lg:h-[573px] bg-white rounded-2xl p-4"
+        >
+          <canvas id="windRadarChart"></canvas>
+        </div>
+        <div class="w-full lg:w-auto mt-6 lg:mt-0">
+          <h1 class="text-24 lg:text-32 font-bold mb-[14px] text-left">
+            {{ t('Chart__title') }}
+          </h1>
+          <p class="text-14 lg:text-16 w-full lg:w-[556px] mt-4 text-dark-300">
+            {{ t('Chart__text') }}
+          </p>
+          <div class="mt-[22px]">
+            <h2 class="font-bold text-14 text-left">
+              {{ t('Chart__select') }}
+            </h2>
+            <div class="relative w-full max-w-[333px]">
+              <div @click="toggleDropdown" class="custom-select">
+                {{ selectedYear || 'Выберите год' }}
+                <span class="arrow" :class="{ open: isOpen }">&#9662;</span>
+              </div>
+              <ul v-if="isOpen" class="custom-dropdown">
+                <li v-for="year in years" :key="year" @click="selectYear(year)">
+                  {{ year }}
+                </li>
+              </ul>
             </div>
-           </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 </template>
+
 <style lang="css" scoped>
 .custom-select {
-    margin-top: 10px;
-    width: 100%;
-    padding: 12px 16px;
-    border: 1px solid #a0aec0;
-    border-radius: 8px;
-    background-color: white;
-    color: black;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s;
-    text-align: left;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  margin-top: 10px;
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #a0aec0;
+  border-radius: 8px;
+  background-color: white;
+  color: black;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .custom-dropdown {
-    position: absolute;
-    width: 100%;
-    background: white;
-    border: 1px solid #a0aec0;
-    border-radius: 8px;
-    margin-top: 4px;
-    padding: 5px 0;
-    z-index: 10;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 0.2s ease-in-out;
+  position: absolute;
+  width: 100%;
+  background: white;
+  border: 1px solid #a0aec0;
+  border-radius: 8px;
+  margin-top: 4px;
+  padding: 5px 0;
+  z-index: 10;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.2s ease-in-out;
 }
 
 .custom-dropdown li {
-    padding: 10px 16px;
-    cursor: pointer;
-    transition: 0.3s;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 .custom-dropdown li:hover {
-    background-color: #33B34A;
-    color: white;
+  background-color: #33b34a;
+  color: white;
 }
 
-/* Анимация появления */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-5px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Стрелка */
 .arrow {
-    transition: transform 0.3s;
+  transition: transform 0.3s;
 }
 
 .arrow.open {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 </style>
