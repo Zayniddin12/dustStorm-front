@@ -13,7 +13,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-
 @layer ui {
   .transition-300 {
     @apply transition-all duration-300;
@@ -165,8 +164,8 @@ a {
 .InfoActCard {
   box-shadow: 0px 1.22px 3.62px 0px #00273405;
   box-shadow: 0px 3.38px 10.02px 0px #00273408;
-  box-shadow: 0px 8.14px 24.12px 0px #0027340A;
-  box-shadow: 0px 27px 80px 0px #0027340F;
+  box-shadow: 0px 8.14px 24.12px 0px #0027340a;
+  box-shadow: 0px 27px 80px 0px #0027340f;
 }
 
 #nprogress .bar {
@@ -176,4 +175,39 @@ a {
 
 #nprogress .peg {
   box-shadow: 0 0 10px #3498db, 0 0 5px #3498db !important;
+}
+.shimmer {
+  background-color: #f6f7f8;
+  background-image: linear-gradient(
+    to right,
+    #f6f7f8 0%,
+    #edeef1 20%,
+    #f6f7f8 40%,
+    #f6f7f8 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  display: inline-block;
+  position: relative;
+  animation-duration: 1s;
+  animation-fill-mode: backwards;
+  animation-iteration-count: infinite;
+  animation-name: placeholderShimmer;
+  animation-timing-function: ease;
+}
+@keyframes placeholderGrayShimmer {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+@keyframes placeholderShimmer {
+  0% {
+    background-position: -400px 0;
+  }
+  100% {
+    background-position: 400px 0;
+  }
 }

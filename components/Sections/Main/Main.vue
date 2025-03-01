@@ -33,13 +33,15 @@
             text="contact_us_btn"
             variant="outline-primary"
             class="!test-white"
-            @click="navigateTo('/contact')"
+            @click="navigateTo('#contacts')"
           />
-          <a href="#numbers_about">
-            <UIButton class="max-sm:w-full" text="stations" variant="primary" />
+          <a href="#stations">
+            <UIButton class="max-sm:w-full" :text="$t('stations')" variant="primary" />
           </a>
         </div>
-        <div class="flex gap-4 max-sm:hidden absolute bottom-[80px]">
+        <div
+          class="flex gap-4 max-sm:hidden absolute md:bottom-[80px] bottom-[100px]"
+        >
           <button
             aria-label="prev button"
             class="living-prev-el flex-center w-10 h-10 rounded-full border border-white bg-white/80 transition-300 hover:bg-white group"

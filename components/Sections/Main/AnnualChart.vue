@@ -5,7 +5,7 @@ import { useI18n } from 'vue-i18n'
 import { useSupportStore } from '@/Store/store'
 
 const years = Array.from({ length: 10 }, (_, i) => new Date().getFullYear() - i)
-const selectedYear = ref(null)
+const selectedYear = ref(2025)
 const chartInstance = ref(null)
 const { t, locale } = useI18n()
 const supportStore = useSupportStore()
@@ -46,7 +46,8 @@ const labelsMap = {
 
 const generateRadarData = () => {
   const labels = labelsMap[locale.value] || labelsMap.en
-  const data = supportStore.windData.map((item) => item.wind_speed ?? 0)
+  const data = supportStore.windData.map((item) => item.wind_repeat ?? 0)
+  console.log(data)
 
   return {
     labels,
@@ -75,7 +76,7 @@ const initChart = () => {
         r: {
           beginAtZero: true,
           min: 0,
-          max: 8,
+          max: 250,
           grid: { color: 'rgba(0, 0, 0, 0.1)' },
           pointLabels: { color: '#374151', font: { size: 14 } },
           ticks: {
@@ -100,12 +101,14 @@ const selectYear = (year) => {
   isOpen.value = false
 }
 
-watch([selectedYear, locale], async ([newYear]) => {
-  if (newYear) {
-    await supportStore.getWindAverage(newYear)
+watch(
+  selectedYear,
+  async () => {
+    await supportStore.getWindAverage(selectedYear.value)
     initChart()
-  }
-})
+  },
+  { deep: true, immediate: true }
+)
 
 onMounted(() => {
   selectedYear.value = years[0]

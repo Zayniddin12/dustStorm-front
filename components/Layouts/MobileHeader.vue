@@ -22,10 +22,25 @@
         <li v-for="(item, idx) of links" :key="idx">
           <div class="flex items-center justify-between pr-4">
             <NuxtLink
-              :to="'/' + item?.slug"
+              v-if="!item.slug.startsWith('#')"
+              :to="`${item.slug}`"
               class="text-dark text-base font-medium !leading-130 transition-colors duration-300 hover:text-primary"
-              >{{ $t(`${item.title}`) }}
+              :class="{
+                'text-primary':
+                  route.path === item.slug || route.hash === item.slug,
+              }"
+              >{{ $t(item.title) }}
             </NuxtLink>
+            <a
+              v-else
+              :href="item.slug"
+              @click.prevent="handleHashScroll(item.slug)"
+              class="text-dark text-base font-medium !leading-130 transition-colors duration-300 hover:text-primary"
+              :class="{
+                'text-primary': route.hash === item.slug,
+              }"
+              >{{ $t(item.title) }}
+            </a>
           </div>
           <div class="bg-dark/10 my-4 w-full h-[1px]"></div>
         </li>
@@ -50,13 +65,21 @@ import { useRoute } from 'vue-router'
 
 import type { Links } from '~/data/menu'
 interface Props {
-  links: Array<Links>
+  links: Links[]
 }
 
 defineProps<Props>()
 const emit = defineEmits(['closeMobileHeader'])
 
 const route = useRoute()
+
+const handleHashScroll = (hash: string) => {
+  const element = document.querySelector(hash)
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' })
+    emit('closeMobileHeader')
+  }
+}
 
 const socials = [
   {

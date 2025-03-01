@@ -12,11 +12,11 @@
       :class="[
         itemClass,
         modelValue === tab?.value
-          ? 'text-white !font-semibold bg-blue lg:bg-transparent transition-300'
+          ? 'text-white !font-semibold bg-blue hover:bg-primary lg:bg-transparent border-blue transition-300'
           : 'text-dark',
         modelValue === tab?.value ? customeClass : '',
       ]"
-      class="py-2 rounded-full transition-300 text-dark w-full text-lg font-semibold z-10"
+      class="py-2 rounded-full transition-300 text-dark w-full text-lg border border-gray font-semibold z-10 hover:bg-primary hover:border-primary hover:text-white"
       :id="`item_${tab.value}`"
       v-for="(tab, idx) in list"
       :key="idx"

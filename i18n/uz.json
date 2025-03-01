@@ -27,5 +27,12 @@
   "for_today": "Shamol va namlik",
   "for_all_time": "Shamol tezligi",
   "attendance": "Davomad",
-  "graphic_attendance": "Foydalanuvchilar davomati grafigi"
+  "graphic_attendance": "Foydalanuvchilar davomati grafigi",
+  "stations": "Stansiyalar",
+  "wind_speed":"shamol tezligi",
+  "search_placeholder":"Qidiring...",
+  "on_map":"Joylashuvi",
+  "map":"Xarita",
+  "list":"List",
+  "wind_humidity":"shamol namligi"
 }

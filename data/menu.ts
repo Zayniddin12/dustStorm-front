@@ -1,6 +1,6 @@
 export type Links = {
     id: number
-    text: string
-    url: string
-    name:  string
+    title: string
+
+    slug:string
   }

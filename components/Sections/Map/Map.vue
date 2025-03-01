@@ -203,22 +203,27 @@
             <client-only :key="activeTab">
               <yandex-map
                 v-model="activeCoord"
+                :coords="coords"
                 :settings="settings"
                 :zoom="16"
                 :controls="[]"
-                class="w-full h-full absolute inset-0"
+                class="absolute inset-0 w-screen h-full z-0"
               >
                 <yandex-map-default-scheme-layer />
                 <yandex-map-default-features-layer />
                 <yandex-map-marker
                   v-for="(card, i) in markers"
                   :key="i"
-                  :settings="{ coordinates: [card?.longitude, card?.latitude] }"
+                  :settings="{ coordinates: [card?.latitude, card?.longitude] }"
                   marker-id="123"
-                  :hint-content="card?.name"
-                  :icon="markerIcon"
-                  cluster-name="1"
-                />
+                  position="top-center left-center"
+                  class="!size-20"
+                >
+                  <img
+                    alt="Marker"
+                    class="cursor-pointer w-[45px] h-[60px]"
+                    src="/public/images/svg/map-pin-filled.svg"
+                /></yandex-map-marker>
               </yandex-map>
             </client-only>
           </div>

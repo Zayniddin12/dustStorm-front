@@ -68,9 +68,9 @@ onUnmounted(() => {
             text="contact_us_btn"
             variant="outline-primary"
             class="!test-white"
-            @click="navigateTo('/contact')"
+            @click="navigateTo('#contacts')"
           />
-          <a href="#numbers_about">
+          <a href="#stations">
             <UIButton class="max-sm:w-full" text="stations" variant="primary" />
           </a>
         </div>

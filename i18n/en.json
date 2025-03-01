@@ -28,5 +28,11 @@
   "for_today": "Wind humidity",
   "for_all_time": "Wind speed",
   "attendance": "Attendance",
-  "graphic_attendance": "User attendance chart"
+  "graphic_attendance": "User attendance chart",
+  "wind_speed": "wind speed",
+  "search_placeholder": "Search...",
+  "on_map": "Location",
+  "map": "Map",
+  "list": "List",
+  "wind_humidity": "wind humidity"
 }
