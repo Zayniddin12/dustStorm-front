@@ -1,7 +1,7 @@
 <template>
   <div>
     <LayoutsHeader />
-    <div class="min-h-[calc(100vh-558px)]">
+    <div class="min-h-[calc(100vh-328px)]">
       <slot />
     </div>
     <LayoutsFooter />

@@ -34,5 +34,6 @@
   "on_map": "Location",
   "map": "Map",
   "list": "List",
-  "wind_humidity": "wind humidity"
+  "wind_humidity": "wind humidity",
+  "main": "Main page"
 }

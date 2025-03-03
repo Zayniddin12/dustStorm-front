@@ -106,7 +106,10 @@ onMounted(async () => {
 
             <!-- Address -->
             <template v-if="contactInfo.address">
-              <a :href="contactInfo.map_url || '#'" target="_blank">
+              <a
+                :href="`https://yandex.ru/maps/?pt=${contactInfo?.longitude},${contactInfo?.latitude}&z=12&l=map`"
+                target="_blank"
+              >
                 <div class="flex items-center gap-[8px]">
                   <span
                     class="icon-map-pin-filled text-warning-100 text-[22px]"
