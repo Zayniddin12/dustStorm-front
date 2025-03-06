@@ -25,12 +25,12 @@ const statisticsSection = ref(null)
 const stationsSection = ref(null)
 
 onMounted(() => {
-  if (route.hash === '#statistics' && statisticsSection.value?.$el) {
+  if (route.fullPath === '/#statistics' && statisticsSection.value?.$el) {
     setTimeout(() => {
       statisticsSection.value.$el.scrollIntoView({ behavior: 'smooth' })
     }, 500)
   }
-  if (route.hash === '#stations' && stationsSection.value?.$el) {
+  if (route.fullPath === '#stations' && stationsSection.value?.$el) {
     setTimeout(() => {
       stationsSection.value.$el.scrollIntoView({ behavior: 'smooth' })
     }, 500)

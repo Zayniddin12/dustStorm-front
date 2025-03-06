@@ -12,31 +12,16 @@
         </p>
       </NuxtLink>
       <ul class="md:flex hidden ml-[97px] gap-4">
-        <li
-          v-for="(item, key) in headerMenu"
-          :key="item.slug || key"
-          class="text-sm font-medium leading-[17px] transition-300 hover:text-primary cursor-pointer"
-        >
+        <li v-for="(item, key) in headerMenu" :key>
           <NuxtLink
-            v-if="!item.slug.startsWith('#')"
             :to="`${item.slug}`"
+            class="text-dark text-sm font-medium !leading-130 transition-colors duration-300 hover:text-primary"
             :class="{
-              'router-link-active':
-                route.path === item.slug || route.hash == item.slug,
+              'text-primary': route.fullPath === item.slug,
             }"
           >
             {{ item.title }}
           </NuxtLink>
-          <a
-            v-else
-            :href="item.slug"
-            @click.prevent="handleHashScroll(item.slug)"
-            :class="{
-              'router-link-active': route.hash === item.slug,
-            }"
-          >
-            {{ item.title }}
-          </a>
         </li>
       </ul>
 
@@ -119,10 +104,6 @@ const headerMenu = computed<Links[]>(() => {
 </script>
 
 <style scoped>
-.router-link-active {
-  color: #33b34a;
-}
-
 .from-left-enter-active {
   animation: from-left 300ms ease-out;
 }

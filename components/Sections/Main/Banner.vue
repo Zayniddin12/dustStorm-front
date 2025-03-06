@@ -36,8 +36,8 @@ onUnmounted(() => {
         background: radial-gradient(
           321.91% 102.42% at 99.03% 16.69%,
           rgba(13, 14, 41, 0.09) 19.43%,
-          rgba(13, 14, 41, 0.9) 100%
-        );
+          rgba(13, 14, 41, 0.9) 90%
+        ) !important ;
       "
     />
     <div class="relative z-10 w-full h-full inset-0 top-0">

@@ -22,25 +22,13 @@
         <li v-for="(item, idx) of links" :key="idx">
           <div class="flex items-center justify-between pr-4">
             <NuxtLink
-              v-if="!item.slug.startsWith('#')"
               :to="`${item.slug}`"
               class="text-dark text-base font-medium !leading-130 transition-colors duration-300 hover:text-primary"
               :class="{
-                'text-primary':
-                  route.path === item.slug || route.hash === item.slug,
+                'text-primary': route.fullPath === item.slug,
               }"
               >{{ $t(item.title) }}
             </NuxtLink>
-            <a
-              v-else
-              :href="item.slug"
-              @click.prevent="handleHashScroll(item.slug)"
-              class="text-dark text-base font-medium !leading-130 transition-colors duration-300 hover:text-primary"
-              :class="{
-                'text-primary': route.hash === item.slug,
-              }"
-              >{{ $t(item.title) }}
-            </a>
           </div>
           <div class="bg-dark/10 my-4 w-full h-[1px]"></div>
         </li>

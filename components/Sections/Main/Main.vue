@@ -36,10 +36,15 @@
             @click="navigateTo('#contacts')"
           />
           <a href="#stations">
-            <UIButton class="max-sm:w-full" :text="$t('stations')" variant="primary" />
+            <UIButton
+              class="max-sm:w-full"
+              :text="$t('stations')"
+              variant="primary"
+            />
           </a>
         </div>
         <div
+          v-if="banners?.length > 1"
           class="flex gap-4 max-sm:hidden absolute md:bottom-[80px] bottom-[100px]"
         >
           <button

@@ -4,12 +4,9 @@
       <CCard class="flex-shrink-0 p-6">
         <div class="flex justify-between mb-5">
           <div>
-            <h4 class="text-xl text-dark font-semibold mb-1">
+            <h4 class="text-xl max-md:hidden text-dark font-semibold mb-1">
               {{ $t('attendance') }}
             </h4>
-            <p class="text-gray-300 text-xs font-normal leading-130">
-              {{ $t('graphic_attendance') }}
-            </p>
           </div>
           <Tab
             :list="tabList"
@@ -19,19 +16,27 @@
             item-class="!pt-0 whitespace-nowrap"
           />
         </div>
-        <div v-if="series[0]?.data?.length">
-          <client-only>
-            <VueApexCharts :options="options" :series="series" height="280px" />
-          </client-only>
-        </div>
+        <Transition mode="out-in">
+          <div :key="series[0]?.data?.length">
+            <div v-if="series[0]?.data?.length">
+              <client-only>
+                <VueApexCharts
+                  :options="options"
+                  :series="series"
+                  height="280px"
+                />
+              </client-only>
+            </div>
 
-        <div v-if="!series[0].data.length">
-          <NoData
-            :title="$t('empty_data')"
-            class="mt-8"
-            image="/svg/empty-state.svg"
-          />
-        </div>
+            <div v-if="!series[0].data.length">
+              <NoData
+                :title="$t('empty_data')"
+                class="mt-8"
+                image="/svg/empty-state.svg"
+              />
+            </div>
+          </div>
+        </Transition>
       </CCard>
     </div>
   </section>

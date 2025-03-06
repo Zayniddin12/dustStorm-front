@@ -49,7 +49,7 @@ onMounted(async () => {
               dust storm
             </p>
           </NuxtLink>
-          <p class="w-full md:w-[582px] text-center text-white mb-[24px]">
+          <p class="w-full md:w-[582px] text-white mb-[24px]">
             {{ t('Home__Footer__text') }}
           </p>
         </div>

@@ -19,12 +19,15 @@
 
     <div
       v-if="isLoading"
-      class="flex flex-wrap gap-4 justify-center items-center min-h-[200px] pt-[50px] sm:pt-[70px] pb-[80px] sm:pb-[120px]"
+      class="flex flex-nowrap gap-4 justify-center items-center min-h-[200px] pt-[50px] sm:pt-[70px] pb-[80px] sm:pb-[120px]"
     >
-      <div v-for="i in 4" :key="i" class="shimmer-card_report_section"></div>
+      <div v-for="i in 4" :key="i" class="shimmer-card_report_section shrink-0"></div>
     </div>
 
-    <div v-else class="pt-[50px] sm:pt-[70px] pb-[80px] sm:pb-[120px]">
+    <div
+      v-else
+      class="pt-[50px] sm:pt-[70px] pb-[80px] sm:pb-[120px] container"
+    >
       <swiper
         :space-between="24"
         :speed="1000"
@@ -32,13 +35,12 @@
         loop
         allow-touch-move
         slides-per-view="auto"
-        class="!ml-0"
-        :modules="[Autoplay]"
+        class="!ml-0 !overflow-visible"
       >
         <swiper-slide
           v-for="(item, index) in reports"
           :key="index"
-          class="!w-fit"
+          class="!w-fit !overflow-visible"
         >
           <CardsReport :report="item" />
         </swiper-slide>

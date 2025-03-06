@@ -75,12 +75,10 @@ const initChart = () => {
       scales: {
         r: {
           beginAtZero: true,
-          min: 0,
-          max: 250,
           grid: { color: 'rgba(0, 0, 0, 0.1)' },
           pointLabels: { color: '#374151', font: { size: 14 } },
           ticks: {
-            stepSize: 1,
+            display: false, // Ticks (raqamlar) ko‘rinmas bo‘lishi uchun
           },
         },
       },

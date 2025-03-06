@@ -66,13 +66,7 @@ const goToPage = (page: number) => {
   fetchNews()
 }
 
-const formatDate = (date: string) => {
-  return new Date(date).toLocaleDateString('ru-RU', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-  })
-}
+
 </script>
 
 <template>
@@ -93,13 +87,9 @@ const formatDate = (date: string) => {
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[20px] mt-8"
       >
         <NewsCard
-          v-for="item in newsData.results"
-          :key="item.id"
-          :image="item.image"
-          :date="formatDate(item.created_at)"
-          :title="item.title"
-          :description="item.description"
-          :slug="item.slug"
+          v-for="(item, key) in newsData.results"
+          :key
+         v-bind="{item}"
         />
       </div>
       <div

@@ -55,9 +55,9 @@ onMounted(fetchNews);
                 <div v-for="index in 2" :key="index" class="shimmer-card_envent"></div>
             </div>
             <!-- Контент -->
-            <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-[16px] sm:gap-[24px]">
-                <EventCard v-for="item in newsData" :key="item.id" :foto="item.image" :title="item.title"
-                    :paragraph="item.description" />
+            <div v-else class="grid grid-cols-1 sm:grid-cols-2 gap-[16px] sm:gap-[24px]">
+                <EventCard v-for="item in newsData" :key="item?.id" :foto="item?.image" :title="item?.title"
+                    :paragraph="item?.description" :slug="item?.slug" />
             </div>
         </div>
     </section>
