@@ -15,13 +15,6 @@ export default <Partial<Config>>{
   ],
   theme: {
     extend: {
-      container: {
-        center: true,
-        padding: {
-          DEFAULT: '25px',
-        },
-        screens: ['1200px'],
-      },
       backdropBlur: {
         custom: '7px',
       },
@@ -64,6 +57,7 @@ export default <Partial<Config>>{
           600: '#707377',
           700: '#FFFFFF33',
           800: '#FFFFFF1A',
+          900: '#F8F9FA',
         },
         red: {
           DEFAULT: '#E04A36',
@@ -71,6 +65,9 @@ export default <Partial<Config>>{
       },
       boxShadow: {
         card: '0px 4px 4px 0px #00000040',
+        marker: '0px 0px 4px 3px #00000030',
+        'map-hover': '0px 14px 30px rgba(48, 161, 219, 0.06)',
+        'map-list': '0px 10px 28px rgba(38, 55, 91, 0.06)',
       },
       backgroundImage: {
         gradient: 'linear-gradient(180deg, #33B34A 0%, #10161C 100%)',

@@ -25,13 +25,13 @@ export default defineNuxtConfig({
         {
           hid: 'og:title',
           property: 'og:title',
-          content: 'Unit Study',
+          content: 'Dust Storm',
         },
         {
           hid: 'og:description',
           property: 'og:description',
           content:
-            'Unity Study provides quality education consulting and guarantees study opportunities abroad, offering expert guidance for a successful international educational experience.',
+            'Using modern artificial intelligence technologies, we predict dust storms in the Aral Sea region and protect our nature from future disasters. Remember, protecting nature is the duty of each of us, because if we protect it, it will protect us!',
         },
         {
           hid: 'twitter:image:alt',
@@ -41,18 +41,18 @@ export default defineNuxtConfig({
         {
           hid: 'twitter:title',
           property: 'twitter:title',
-          content: 'Unit Study',
+          content: 'Dust Storm',
         },
         {
           hid: 'twitter:description',
           property: 'twitter:description',
           content:
-            'Unity Study provides quality education consulting and guarantees study opportunities abroad, offering expert guidance for a successful international educational experience.',
+            'Using modern artificial intelligence technologies, we predict dust storms in the Aral Sea region and protect our nature from future disasters. Remember, protecting nature is the duty of each of us, because if we protect it, it will protect us!',
         },
         {
           name: 'description',
           content:
-            'Unity Study provides quality education consulting and guarantees study opportunities abroad, offering expert guidance for a successful international educational experience',
+            'Using modern artificial intelligence technologies, we predict dust storms in the Aral Sea region and protect our nature from future disasters. Remember, protecting nature is the duty of each of us, because if we protect it, it will protect us!',
         },
       ],
     },
@@ -79,45 +79,6 @@ export default defineNuxtConfig({
     'vue-yandex-maps/nuxt',
   ],
 
-  // site: {
-  //   url: 'https://unit-study.uicgroup.tech/',
-  // },
-  // routeRules: {
-  //   '/': {
-  //     sitemap: {
-  //       changefreq: 'daily',
-  //       priority: 1,
-  //       lastmod: new Date().toString('yyyy-mm-ddThh:mm:ss:zzz'),
-  //     },
-  //   },
-  //   '/ru': {
-  //     sitemap: {
-  //       changefreq: 'daily',
-  //       priority: 1,
-  //       lastmod: new Date().toString('yyyy-mm-ddThh:mm:ss:zzz'),
-  //     },
-  //   },
-  //   '/en': {
-  //     sitemap: {
-  //       changefreq: 'daily',
-  //       priority: 1,
-  //       lastmod: new Date().toString('yyyy-mm-ddThh:mm:ss:zzz'),
-  //     },
-  //   },
-  // },
-  // sitemap: {
-  //   exclude: ['/profile/**', '/profile', '/edit/**', '/edit'],
-  //   xslColumns: [
-  //     { label: 'URL', width: '50%' },
-  //     { label: 'Last Modified', select: 'sitemap:lastmod', width: '25%' },
-  //     { label: 'Priority', select: 'sitemap:priority', width: '12.5%' },
-  //     {
-  //       label: 'Change Frequency',
-  //       select: 'sitemap:changefreq',
-  //       width: '12.5%',
-  //     },
-  //   ],
-  // },
 
   css: ['@/assets/tailwind.css'],
   build: {

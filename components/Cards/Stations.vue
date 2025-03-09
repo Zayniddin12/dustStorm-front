@@ -3,7 +3,7 @@
     class="bg-white rounded-xl py-4 px-5 mt-3 first:mt-0 border duration-300 flex flex-col justify-between"
     :class="
       active
-        ? 'shadow-map-hover border-blue'
+        ? 'shadow-map-hover border-primary'
         : 'border-grey-300  hover:shadow-map-hover'
     "
   >
