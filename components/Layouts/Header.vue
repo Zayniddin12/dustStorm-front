@@ -5,10 +5,16 @@
   >
     <nav class="container flex items-center">
       <div class="cursor-pointer mr-3 lg:hidden" @click="showMobileHeader">
-        <i :class="shouldStick ?'text-white':'text-primary'" class="icon-burger text-xl"></i>
+        <i
+          :class="shouldStick ? 'text-white' : 'text-primary'"
+          class="icon-burger text-xl"
+        ></i>
       </div>
       <NuxtLink to="/">
-        <p :class="shouldStick ?'text-white':'text-primary'" class="md:text-32 text-xl text-primary uppercase font-medium">
+        <p
+          :class="shouldStick ? 'text-white' : 'text-primary'"
+          class="md:text-32 text-xl text-primary uppercase font-medium"
+        >
           dust storm
         </p>
       </NuxtLink>
@@ -78,21 +84,18 @@ const headerMenuRu = [
   { id: 1, title: 'Глава', slug: '/' },
   { id: 2, title: 'Новости', slug: '/news' },
   { id: 3, title: 'Отчеты', slug: '/report' },
-  { id: 4, title: 'Статистики', slug: '/#statistics' },
 ]
 
 const headerMenuEn = [
   { id: 1, title: 'Home', slug: '/' },
   { id: 2, title: 'News', slug: '/news' },
   { id: 3, title: 'Reports', slug: '/report' },
-  { id: 4, title: 'Statistics', slug: '/#statistics' },
 ]
 
 const headerMenuUz = [
   { id: 1, title: 'Bo`sh sahifa', slug: '/' },
   { id: 2, title: 'Yangiliklar', slug: '/news' },
   { id: 3, title: 'Hisobotlar', slug: '/report' },
-  { id: 4, title: 'Statisyikalar', slug: '/#statistics' },
 ]
 
 const headerMenu = computed<Links[]>(() => {
