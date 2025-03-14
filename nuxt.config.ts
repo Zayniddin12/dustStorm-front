@@ -106,7 +106,9 @@ export default defineNuxtConfig({
 
   devServerHandlers: [],
 
- 
+  nitro: {
+    serveStatic: true,
+  },
 
   experimental: {
     payloadExtraction: false,
