@@ -66,8 +66,6 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxtjs/tailwindcss',
-    'nuxt-simple-robots',
-    'nuxt-simple-sitemap',
     'nuxt-marquee',
     [
       '@pinia/nuxt',
@@ -108,9 +106,7 @@ export default defineNuxtConfig({
 
   devServerHandlers: [],
 
-  nitro: {
-    serveStatic: true,
-  },
+ 
 
   experimental: {
     payloadExtraction: false,
