@@ -1,5 +1,5 @@
 <template>
-  <header ref="scroll" class="md:h-screen relative hero">
+  <header ref="scroll" class="md:h-screen h-[300px] relative hero">
     <Client-Only>
       <Swiper
         v-if="banners?.length"
@@ -22,50 +22,6 @@
         </SwiperSlide>
       </Swiper>
     </Client-Only>
-    <main
-      class="container left-[50%] -translate-x-1/2 md:absolute relative z-30"
-    >
-      <div
-        class="relative max-md:h-full max-md:flex max-md:flex-col max-md:pt-[290px] max-md:pb-10 max-md:gap-4"
-      >
-        <div class="max-sm:flex-col max-md:flex hidden gap-3 relative z-30">
-          <UIButton
-            text="contact_us_btn"
-            variant="outline-primary"
-            class="!test-white"
-            @click="navigateTo('#contacts')"
-          />
-          <a href="#stations">
-            <UIButton
-              class="max-sm:w-full"
-              :text="$t('stations')"
-              variant="primary"
-            />
-          </a>
-        </div>
-        <div
-          v-if="banners?.length > 1"
-          class="flex gap-4 max-sm:hidden absolute md:bottom-[80px] bottom-[100px]"
-        >
-          <button
-            aria-label="prev button"
-            class="living-prev-el flex-center w-10 h-10 rounded-full border border-white bg-white/80 transition-300 hover:bg-white group"
-          >
-            <i
-              class="icon-chevron text-2xl text-blue group-hover:text-primary transition-300"
-            />
-          </button>
-          <button
-            aria-label="next button"
-            class="living-next-el flex-center w-10 h-10 rounded-full border border-white bg-white/80 rotate-180 transition-300 hover:bg-white group"
-          >
-            <i
-              class="icon-chevron text-2xl text-blue group-hover:text-primary transition-300"
-            />
-          </button>
-        </div>
-      </div>
-    </main>
   </header>
 </template>
 

@@ -13,34 +13,34 @@ const isOpen = ref(false)
 
 const labelsMap = {
   ru: [
-    'Север',
-    'Северо-восток',
-    'Восток',
-    'Юго-восток',
-    'Юг',
-    'Юго-запад',
-    'Запад',
-    'Северо-запад',
+    'Сев', // Север
+    'СВ', // Северо-восток
+    'Вост', // Восток
+    'ЮВ', // Юго-восток
+    'Юг', // Юг
+    'ЮЗ', // Юго-запад
+    'Зап', // Запад
+    'СЗ', // Северо-запад
   ],
   uz: [
-    'Shimol',
-    'Shimoli-sharq',
-    'Sharq',
-    'Janubi-sharq',
-    'Janub',
-    'Janubi-gʻarb',
-    'Gʻarb',
-    'Shimoli-gʻarb',
+    'Shim', // Shimol
+    'Sh-Sh', // Shimoli-sharq
+    'Sharq', // Sharq
+    'J-Sh', // Janubi-sharq
+    'Janub', // Janub
+    'J-Gʻ', // Janubi-gʻarb
+    'Gʻarb', // Gʻarb
+    'Sh-Gʻ', // Shimoli-gʻarb
   ],
   en: [
-    'North',
-    'Northeast',
-    'East',
-    'Southeast',
-    'South',
-    'Southwest',
-    'West',
-    'Northwest',
+    'N', // North
+    'NE', // Northeast
+    'E', // East
+    'SE', // Southeast
+    'S', // South
+    'SW', // Southwest
+    'W', // West
+    'NW', // Northwest
   ],
 }
 
@@ -114,36 +114,26 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="bg-gray-200 py-[30px]">
-    <div class="mx-auto max-w-[1200px] px-[15px] mt-[50px]">
-      <div class="flex flex-col lg:flex-row justify-between mb-[24px]">
-        <div
-          class="w-full lg:w-[583px] h-[350px] lg:h-[573px] bg-white rounded-2xl p-4"
-        >
-          <canvas id="windRadarChart"></canvas>
-        </div>
-        <div class="w-full lg:w-auto mt-6 lg:mt-0">
-          <h1 class="text-24 lg:text-32 font-bold mb-[14px] text-left">
-            {{ t('Chart__title') }}
-          </h1>
-          <p class="text-14 lg:text-16 w-full lg:w-[556px] mt-4 text-dark-300">
-            {{ t('Chart__text') }}
-          </p>
-          <div class="mt-[22px]">
-            <h2 class="font-bold text-14 text-left">
-              {{ t('Chart__select') }}
-            </h2>
-            <div class="relative w-full max-w-[333px]">
-              <div @click="toggleDropdown" class="custom-select">
-                {{ selectedYear || 'Выберите год' }}
-                <span class="arrow" :class="{ open: isOpen }">&#9662;</span>
-              </div>
-              <ul v-if="isOpen" class="custom-dropdown">
-                <li v-for="year in years" :key="year" @click="selectYear(year)">
-                  {{ year }}
-                </li>
-              </ul>
+  <section>
+    <div class="flex flex-col-reverse gap-2 justify-between">
+      <div class="size-full bg-white rounded-2xl p-4">
+        <canvas id="windRadarChart"></canvas>
+      </div>
+      <div class="w-full lg:w-auto lg:mt-0">
+        <h1 class="text-xl text-dark font-semibold mb-1">
+          {{ t('Chart__title') }}
+        </h1>
+        <div>
+          <div class="relative w-full max-w-[333px]">
+            <div @click="toggleDropdown" class="custom-select">
+              {{ selectedYear || 'Выберите год' }}
+              <span class="arrow" :class="{ open: isOpen }">&#9662;</span>
             </div>
+            <ul v-if="isOpen" class="custom-dropdown">
+              <li v-for="year in years" :key="year" @click="selectYear(year)">
+                {{ year }}
+              </li>
+            </ul>
           </div>
         </div>
       </div>

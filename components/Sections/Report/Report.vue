@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-gradient pt-[80px]">
+  <section class="bg-gradient pt-[20px] overflow-hidden">
     <div class="container mx-auto px-4">
       <div class="flex flex-col sm:flex-row justify-between items-left">
         <h1 class="text-[28px] sm:text-[32px] text-white font-normal">
@@ -19,15 +19,16 @@
 
     <div
       v-if="isLoading"
-      class="flex flex-nowrap gap-4 justify-center items-center min-h-[200px] pt-[50px] sm:pt-[70px] pb-[80px] sm:pb-[120px]"
+      class="flex flex-nowrap gap-4 justify-center items-center min-h-[200px] pt-[20px] sm:pt-[30px] pb-[40px] sm:pb-[60px]"
     >
-      <div v-for="i in 4" :key="i" class="shimmer-card_report_section shrink-0"></div>
+      <div
+        v-for="i in 4"
+        :key="i"
+        class="shimmer-card_report_section shrink-0"
+      ></div>
     </div>
 
-    <div
-      v-else
-      class="pt-[50px] sm:pt-[70px] pb-[80px] sm:pb-[120px] container"
-    >
+    <div v-else class="!pt-[20px] sm:pt-[30px] !pb-10 sm:pb-[60px] container">
       <swiper
         :space-between="24"
         :speed="1000"

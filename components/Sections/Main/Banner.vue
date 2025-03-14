@@ -40,7 +40,7 @@ onUnmounted(() => {
         ) !important ;
       "
     />
-    <div class="relative z-10 w-full h-full inset-0 top-0">
+    <div class="relative z-10 w-full h-full inset-0 top-0 pt-[100px]">
       <div
         class="animate-fadeAndMove relative md:relative flex flex-col w-full h-full container"
         :class="

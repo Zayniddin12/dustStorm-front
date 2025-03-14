@@ -2,16 +2,23 @@
   <div>
     <SectionsMain />
     <LazySectionsMainSeaAral />
-    <div id="statistics" ref="statisticsSection">
+    <div
+      id="statistics"
+      ref="statisticsSection"
+      class="flex max-md:flex-col container gap-3"
+    >
       <ClientOnly>
         <LazySectionsMainLinechart />
       </ClientOnly>
+      <ClientOnly>
+        <LazySectionsMainAnnualChart />
+      </ClientOnly>
     </div>
-    <LazySectionsMainAnnualChart />
+
     <LazySectionsMainEvent />
     <LazySectionsReport />
     <div id="stations" ref="stationsSection">
-      <ClientOnly><LazySectionsMap :title="$t('donation_boxes')" /></ClientOnly>
+      <ClientOnly><LazySectionsMapLeafletMap /></ClientOnly>
     </div>
   </div>
 </template>

@@ -1,44 +1,42 @@
 <template>
-  <section class="bg-gray-200 py-[30px] pt-[100px]">
-    <div class="mx-auto max-w-[1200px] px-[15px]">
-      <CCard class="flex-shrink-0 p-6">
-        <div class="flex justify-between mb-5">
-          <div>
-            <h4 class="text-xl max-md:hidden text-dark font-semibold mb-1">
-              {{ $t('attendance') }}
-            </h4>
-          </div>
-          <Tab
-            :list="tabList"
-            :model-value="tabValue"
-            @update:model-value="tabValue = $event"
-            class="space-x-3 border-none"
-            item-class="!pt-0 whitespace-nowrap"
-          />
-        </div>
-        <Transition mode="out-in">
-          <div :key="series[0]?.data?.length">
-            <div v-if="series[0]?.data?.length">
-              <client-only>
-                <VueApexCharts
-                  :options="options"
-                  :series="series"
-                  height="280px"
-                />
-              </client-only>
-            </div>
-
-            <div v-if="!series[0].data.length">
-              <NoData
-                :title="$t('empty_data')"
-                class="mt-8"
-                image="/svg/empty-state.svg"
-              />
-            </div>
-          </div>
-        </Transition>
-      </CCard>
+  <section class="w-full">
+    <div>
+      <h4 class="text-xl text-dark font-semibold mb-10">
+        {{ $t('attendance') }}
+      </h4>
     </div>
+    <CCard class="flex-shrink-0 p-6">
+      <div class="flex justify-between mb-5">
+        <Tab
+          :list="tabList"
+          :model-value="tabValue"
+          @update:model-value="tabValue = $event"
+          class="space-x-3 border-none"
+          item-class="!pt-0 whitespace-nowrap"
+        />
+      </div>
+      <Transition mode="out-in">
+        <div :key="series[0]?.data?.length">
+          <div v-if="series[0]?.data?.length">
+            <client-only>
+              <VueApexCharts
+                :options="options"
+                :series="series"
+                height="180px"
+              />
+            </client-only>
+          </div>
+
+          <div v-if="!series[0].data.length">
+            <NoData
+              :title="$t('empty_data')"
+              class="mt-8"
+              image="/svg/empty-state.svg"
+            />
+          </div>
+        </div>
+      </Transition>
+    </CCard>
   </section>
 </template>
 <script lang="ts" setup>

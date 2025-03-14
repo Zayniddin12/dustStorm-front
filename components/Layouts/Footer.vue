@@ -35,21 +35,23 @@ onMounted(async () => {
           :class="[
             'text-center',
             route.path === '/'
-              ? 'flex flex-col md:flex-row items-center gap-[24px] md:text-left'
+              ? 'flex flex-col md:flex-row items-center sm:gap-[24px] md:text-left max-sm:py-3'
               : '',
           ]"
         >
           <NuxtLink to="/">
             <p
               :class="[
-                'md:text-32 text-xl text-primary uppercase font-medium mb-[16px] p-[10px] rounded-b-[16px]',
+                'md:text-32 text-xl text-primary uppercase font-medium sm:mb-[16px] sm:p-[10px] rounded-b-[16px]',
                 route.path === '/' ? '' : 'bg-gray-800 max-w-[300px] mx-auto',
               ]"
             >
               dust storm
             </p>
           </NuxtLink>
-          <p class="w-full md:w-[582px] text-white mb-[24px]">
+          <p
+            class="w-full md:w-[582px] text-white sm:mb-[24px] mb-3 sm:text-base text-sm"
+          >
             {{ t('Home__Footer__text') }}
           </p>
         </div>

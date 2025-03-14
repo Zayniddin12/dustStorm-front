@@ -8,7 +8,7 @@
   >
     <li
       :class="[{ '!text-dark': currentLanguage?.code === item?.code }]"
-      class="text-xs leading-20 font-medium text-dark/40 list-none uppercase cursor-pointer hover:text-primary transition-300"
+      class="text-xs leading-20 font-medium text-dark/30 list-none uppercase cursor-pointer hover:text-primary transition-300"
     >
       {{ item.name }}
     </li>

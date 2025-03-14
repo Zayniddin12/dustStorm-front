@@ -1,13 +1,14 @@
 <template>
   <header
-    class="sticky top-0 left-0 w-full !z-50 md:py-4 py-2 transition-300 bg-white"
+    :class="shouldStick ? 'bg-gradient' : 'bg-tranparent'"
+    class="fixed top-0 left-0 w-full !z-50 md:py-4 py-2 transition-300"
   >
     <nav class="container flex items-center">
       <div class="cursor-pointer mr-3 lg:hidden" @click="showMobileHeader">
-        <i class="icon-burger text-xl text-primary"></i>
+        <i :class="shouldStick ?'text-white':'text-primary'" class="icon-burger text-xl"></i>
       </div>
       <NuxtLink to="/">
-        <p class="md:text-32 text-xl text-primary uppercase font-medium">
+        <p :class="shouldStick ?'text-white':'text-primary'" class="md:text-32 text-xl text-primary uppercase font-medium">
           dust storm
         </p>
       </NuxtLink>
@@ -15,10 +16,13 @@
         <li v-for="(item, key) in headerMenu" :key>
           <NuxtLink
             :to="`${item.slug}`"
-            class="text-dark text-sm font-medium !leading-130 transition-colors duration-300 hover:text-primary"
-            :class="{
-              'text-primary': route.fullPath === item.slug,
-            }"
+            class="text-dark/30 text-sm font-medium !leading-130 transition-colors transition-300 duration-300 hover:text-primary"
+            :class="[
+              {
+                '!text-primary': route.fullPath === item.slug,
+              },
+              shouldStick ? 'text-white' : 'text-dark/30',
+            ]"
           >
             {{ item.title }}
           </NuxtLink>
@@ -101,6 +105,17 @@ const headerMenu = computed<Links[]>(() => {
       return headerMenuEn
   }
 })
+const scrollTop = ref(0)
+
+const checkSticky = () => {
+  scrollTop.value = window.pageYOffset || document.documentElement.scrollTop
+  return scrollTop.value > 0
+}
+
+window.addEventListener('scroll', () => {
+  shouldStick.value = checkSticky()
+})
+const shouldStick = ref(checkSticky())
 </script>
 
 <style scoped>

@@ -15,7 +15,6 @@ export default defineNuxtConfig({
         {
           rel: 'icon',
           type: 'image/x-icon',
-          // href: `/favicon.png`,
         },
       ],
       meta: [
@@ -55,9 +54,12 @@ export default defineNuxtConfig({
             'Using modern artificial intelligence technologies, we predict dust storms in the Aral Sea region and protect our nature from future disasters. Remember, protecting nature is the duty of each of us, because if we protect it, it will protect us!',
         },
       ],
+      script: [
+        { src: 'https://unpkg.com/leaflet@1.4.0/dist/leaflet.js' },
+        { src: 'https://api.windy.com/assets/map-forecast/libBoot.js' },
+      ],
     },
   },
-
   imports: {
     autoImport: true, // Включает автоматический импорт
   },
@@ -79,10 +81,19 @@ export default defineNuxtConfig({
     'vue-yandex-maps/nuxt',
   ],
 
-
-  css: ['@/assets/tailwind.css'],
+  css: [
+    '@/assets/tailwind.css',
+    '@/assets/fonts/fonts.css',
+    '@/assets/icomoon/style.css',
+    'leaflet/dist/leaflet.css',
+  ],
   build: {
-    transpile: ['vue-toastification', 'vue3-apexcharts', 'vue-yandex-maps'],
+    transpile: [
+      'vue-toastification',
+      'vue3-apexcharts',
+      'vue-yandex-maps',
+      '@vue-leaflet/vue-leaflet',
+    ],
   },
   vite: {
     optimizeDeps: {

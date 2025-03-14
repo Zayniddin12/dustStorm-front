@@ -4,7 +4,7 @@
       class="InfoActCard cursor-pointer bg-white rounded-16 hover:shadow-xl duration-300"
     >
       <img
-        class="rounded-t-16 h-[180px] sm:h-[200px] md:h-[250px] lg:h-[327px] w-full object-cover"
+        class="rounded-t-16 aspect-video w-full object-cover"
         :src="imageSrc"
         alt="Foto"
         @error="handleError"
