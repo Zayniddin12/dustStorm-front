@@ -1,7 +1,5 @@
-import { $fetch } from 'ofetch'
+import type { FetchRequest } from 'nitropack'
 import type { FetchOptions } from 'ofetch'
-import { useCookie } from '#app'
-import { ref } from 'vue'
 
 export const useApi = (apiUrl?: string) => {
   const baseURL = apiUrl || (import.meta.env.VITE_API_BASE_URL as string)
@@ -20,14 +18,18 @@ export const useApi = (apiUrl?: string) => {
   }
 
   function $get<T = never>(
-    endpoint: string,
+    endpoint: NitroFetchRequest,
     options?: FetchOptions
   ): Promise<T> {
     return new Promise((resolve, reject) => {
       loading.value = true
       $service(options)(endpoint)
-        .then((response: T | any) => resolve(response))
-        .catch((error) => reject(error.response))
+        .then((response: T | any) => {
+          resolve(response)
+        })
+        .catch((error) => {
+          reject(error.response)
+        })
         .finally(() => {
           loading.value = false
         })
@@ -35,12 +37,14 @@ export const useApi = (apiUrl?: string) => {
   }
 
   function $post<T = never>(
-    endpoint: string,
+    endpoint: NitroFetchRequest,
     options?: FetchOptions
   ): Promise<T> {
     return new Promise((resolve, reject) => {
       $service({ ...options, method: 'POST' })(endpoint)
-        .then((response: T | any) => resolve(response))
+        .then((response: T | any) => {
+          resolve(response)
+        })
         .catch((error) => reject(error.response))
         .finally(() => {
           loading.value = false
@@ -49,12 +53,14 @@ export const useApi = (apiUrl?: string) => {
   }
 
   function $put<T = never>(
-    endpoint: string,
+    endpoint: NitroFetchRequest,
     options?: FetchOptions
   ): Promise<T> {
     return new Promise((resolve, reject) => {
       $service({ ...options, method: 'PUT' })(endpoint)
-        .then((response: T | any) => resolve(response))
+        .then((response: T | any) => {
+          resolve(response)
+        })
         .catch((error) => reject(error.response))
         .finally(() => {
           loading.value = false
@@ -63,12 +69,14 @@ export const useApi = (apiUrl?: string) => {
   }
 
   function $patch<T = never>(
-    endpoint: string,
+    endpoint: NitroFetchRequest,
     options?: FetchOptions
   ): Promise<T> {
     return new Promise((resolve, reject) => {
       $service({ ...options, method: 'PATCH' })(endpoint)
-        .then((response: T | any) => resolve(response))
+        .then((response: T | any) => {
+          resolve(response)
+        })
         .catch((error) => reject(error.response))
         .finally(() => {
           loading.value = false
@@ -77,12 +85,14 @@ export const useApi = (apiUrl?: string) => {
   }
 
   function $delete<T = never>(
-    endpoint: string,
+    endpoint: NitroFetchRequest,
     options?: FetchOptions
   ): Promise<T> {
     return new Promise((resolve, reject) => {
       $service({ ...options, method: 'DELETE' })(endpoint)
-        .then((response: T | any) => resolve(response))
+        .then((response: T | any) => {
+          resolve(response)
+        })
         .catch((error) => reject(error.response))
         .finally(() => {
           loading.value = false

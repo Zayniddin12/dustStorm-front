@@ -23,7 +23,7 @@
   </div>
 </template>
 
-<script setup>
+<!-- <script setup>
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 
@@ -43,4 +43,4 @@ onMounted(() => {
     }, 500)
   }
 })
-</script>
+</script> -->

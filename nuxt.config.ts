@@ -108,6 +108,17 @@ export default defineNuxtConfig({
 
   nitro: {
     serveStatic: true,
+    prerender: {
+      failOnError: false, // Xatolik bo'lsa ham build davom etishi uchun
+      routes: ['/'],
+      crawlLinks: false, // Ichki linklarni avtomatik prerender qilish uchun
+    },
+    storage: {
+      cache: {
+        driver: 'fs', // 'memory' o‘rniga 'fs' qo‘ying
+        base: './cache', // Cache papkasini ko‘rsating
+      },
+    },
   },
 
   experimental: {

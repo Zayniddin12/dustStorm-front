@@ -108,17 +108,20 @@ const headerMenu = computed<Links[]>(() => {
       return headerMenuEn
   }
 })
-const scrollTop = ref(0)
+const shouldStick = ref(false)
 
 const checkSticky = () => {
-  scrollTop.value = window.pageYOffset || document.documentElement.scrollTop
-  return scrollTop.value > 0
+  shouldStick.value = window.pageYOffset > 0
 }
 
-window.addEventListener('scroll', () => {
-  shouldStick.value = checkSticky()
+onMounted(() => {
+  checkSticky() // Sahifa yangilansa ham tekshirib chiqish uchun
+  window.addEventListener('scroll', checkSticky)
 })
-const shouldStick = ref(checkSticky())
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', checkSticky)
+})
 </script>
 
 <style scoped>
