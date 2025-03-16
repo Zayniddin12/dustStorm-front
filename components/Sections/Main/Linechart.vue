@@ -1,11 +1,11 @@
 <template>
-  <section class="w-full">
+  <section class="w-full md:w-[70%] transition-all duration-300 ease-in-out">
     <div>
       <h4 class="text-xl text-dark font-semibold mb-10">
         {{ $t('attendance') }}
       </h4>
     </div>
-    <CCard class="flex-shrink-0 p-6">
+    <CCard class="flex-shrink-0 p-6 relative min-h-[300px]">
       <div class="flex justify-between mb-5">
         <Tab
           :list="tabList"
@@ -15,9 +15,9 @@
           item-class="!pt-0 whitespace-nowrap"
         />
       </div>
-      <Transition mode="out-in">
-        <div :key="series[0]?.data?.length">
-          <div v-if="series[0]?.data?.length">
+      <Transition mode="out-in" name="fade">
+        <div v-if="!loading" :key="series?.[0]?.data?.length">
+          <div v-if="series?.[0]?.data?.length">
             <client-only>
               <VueApexCharts
                 :options="options"
@@ -27,13 +27,16 @@
             </client-only>
           </div>
 
-          <div v-if="!series[0].data.length">
+          <div v-if="!series?.[0].data.length">
             <NoData
               :title="$t('empty_data')"
               class="mt-8"
               image="/svg/empty-state.svg"
             />
           </div>
+        </div>
+        <div v-else class="absolute inset-0 flex items-center justify-center">
+          <CommonSpinner />
         </div>
       </Transition>
     </CCard>
@@ -50,6 +53,8 @@ import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 const supportStore = useSupportStore()
 const tabValue = ref('wind_speed')
+
+const loading = computed(() => supportStore.isLoading)
 
 const options = reactive({
   chart: {

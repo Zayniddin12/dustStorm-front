@@ -44,8 +44,8 @@ const breadcrumbRoutes = computed(() => [
 </script>
 
 <template>
-  <section class="bg-gray-200 pb-[84px]">
-    <UIBreadcrump :breadcrumb="breadcrumbRoutes" />
+  <section class="bg-gray-200 !pb-[84px] pt-5">
+    <UIBreadcrump :breadcrumb="breadcrumbRoutes" class="!mb-5" />
     <div class="container">
       <h1 class="text-[28px] sm:text-[32px] font-normal">
         {{ t('Report__Title') }}

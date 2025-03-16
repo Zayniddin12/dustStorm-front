@@ -1,7 +1,10 @@
 <template>
   <header
-    :class="shouldStick ? 'bg-gradient' : 'bg-tranparent'"
-    class="fixed top-0 left-0 w-full !z-50 md:py-4 py-2 transition-300"
+    :class="[
+      shouldStick && route.path == '/' ? 'bg-gradient' : 'bg-tranparent',
+      route.path == '/' ? 'fixed' : 'stiky bg-gradient',
+    ]"
+    class="top-0 left-0 w-full !z-50 md:py-4 py-2 transition-300"
   >
     <nav class="container flex items-center">
       <div class="cursor-pointer mr-3 lg:hidden" @click="showMobileHeader">
@@ -22,11 +25,12 @@
         <li v-for="(item, key) in headerMenu" :key>
           <NuxtLink
             :to="`${item.slug}`"
-            class="text-dark/30 text-sm font-medium !leading-130 transition-colors transition-300 duration-300 hover:text-primary"
+            class="text-sm font-medium !leading-130 transition-colors transition-300 duration-300 hover:text-primary"
             :class="[
               {
                 '!text-primary': route.fullPath === item.slug,
               },
+              route.path == '/' ? 'text-dar/30' : 'text-white',
               shouldStick ? 'text-white' : 'text-dark/30',
             ]"
           >
@@ -115,8 +119,10 @@ const checkSticky = () => {
 }
 
 onMounted(() => {
-  checkSticky() // Sahifa yangilansa ham tekshirib chiqish uchun
-  window.addEventListener('scroll', checkSticky)
+  setTimeout(() => {
+    checkSticky()
+    window.addEventListener('scroll', checkSticky)
+  }, 100)
 })
 
 onUnmounted(() => {

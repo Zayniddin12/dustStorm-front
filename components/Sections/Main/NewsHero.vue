@@ -65,13 +65,11 @@ const goToPage = (page: number) => {
   currentPage.value = page
   fetchNews()
 }
-
-
 </script>
 
 <template>
-  <section class="pt-5 pb-5 bg-white">
-    <UIBreadcrump :breadcrumb="breadcrumbRoutes" />
+  <section class="bg-white pt-5 !pb-[84px]">
+    <UIBreadcrump :breadcrumb="breadcrumbRoutes" class="!mb-5" />
     <div class="container">
       <h1 class="text-2xl sm:text-3xl font-bold text-dark-200">
         {{ t('InfoArt__Title') }}
@@ -89,7 +87,7 @@ const goToPage = (page: number) => {
         <NewsCard
           v-for="(item, key) in newsData.results"
           :key
-         v-bind="{item}"
+          v-bind="{ item }"
         />
       </div>
       <div

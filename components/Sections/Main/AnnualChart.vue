@@ -114,10 +114,17 @@ onMounted(() => {
 </script>
 
 <template>
-  <section>
+  <section class="w-full md:w-[30%] transition-all duration-300 ease-in-out">
     <div class="flex flex-col-reverse gap-2 justify-between">
-      <div class="size-full bg-white rounded-2xl p-4">
-        <canvas id="windRadarChart"></canvas>
+      <div class="size-full bg-white rounded-2xl p-4 relative min-h-[300px]">
+        <Transition mode="out-in" name="fade">
+          <div v-if="!loading" class="h-full">
+            <canvas id="windRadarChart"></canvas>
+          </div>
+          <div v-else class="absolute inset-0 flex items-center justify-center">
+            <CommonSpinner />
+          </div>
+        </Transition>
       </div>
       <div class="w-full lg:w-auto lg:mt-0">
         <h1 class="text-xl text-dark font-semibold mb-1">

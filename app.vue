@@ -1,12 +1,12 @@
 <template>
   <NuxtLayout>
-    <NuxtPage />
+    <div>
+      <NuxtPage transition />
+    </div>
   </NuxtLayout>
 </template>
 
 <script setup lang="ts">
-
-
 // ToDo: Change this seo data with real data
 
 // useSeoMeta({
@@ -21,4 +21,3 @@
 //   twitterImage: 'Og Image',
 // })
 </script>
-
