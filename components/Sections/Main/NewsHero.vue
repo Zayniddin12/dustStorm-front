@@ -138,7 +138,7 @@ const goToPage = (page: number) => {
 }
 
 .shimmer-card {
-  height: 300px;
+  height: 250px;
   background-color: rgb(218, 218, 218);
   background-size: 200% 100%;
   border-radius: 28px;

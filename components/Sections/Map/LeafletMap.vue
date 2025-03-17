@@ -9,10 +9,10 @@
         @keydown="toogleBlock"
         @dblclick="removeHidden"
         tabindex="0"
-        class="absolute w-screen h-full z-[30]"
+        class="absolute w-screen h-full z-[5]"
       ></div>
       <!-- Left side form -->
-      <div class="container relative z-[50]">
+      <div class="container relative z-[10]">
         <div
           class="md:!w-[470px] h-full z-[1] flex items-end justify-between shadow-map-list"
         >

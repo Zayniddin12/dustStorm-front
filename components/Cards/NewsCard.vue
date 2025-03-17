@@ -12,11 +12,11 @@
         class="absolute top-[130px] left-4 z-10 bg-[#1C1F20B8]/[72%] rounded-xl border border-white/10 backdrop-blur-[7] px-2 py-1"
       >
         <span class="text-white text-xs">
-          {{ formatDate(item?.date) }}
+          {{ dayjs(item?.date).format('MM.DD.YYYY') }}
         </span>
       </div>
       <h2 class="mt-3 mb-1 text-16 font-semibold line-clamp-1">
-        {{ item?.title }}dw
+        {{ item?.title }}
       </h2>
       <p class="text-12 text-gray-600 line-clamp-2">
         {{ item?.description }}
@@ -26,6 +26,7 @@
 </template>
 
 <script setup lang="ts">
+import dayjs from 'dayjs'
 interface props {
   item: {
     image: string
